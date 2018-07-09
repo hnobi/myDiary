@@ -1,0 +1,144 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  /* height: 100%; */
+  background: url("./../img/bg.jpg") bottom;  
+  width:100%;
+  height: 100vh; 
+  background-color: black;
+  background-size: cover;
+}
+
+/* ==================== Nav Start ==================== */
+nav{
+  display:flex;
+  width: 100%;
+  height:auto;
+
+}
+nav > #logo {
+  flex:1;
+  font-size: 25px;
+  padding: 18px;;
+  margin-top: 15px;
+  font-weight: bold;
+  min-width: 30px;
+}
+nav > #logo a {
+  color:#fff;           
+}
+  .menu ul {
+  display: flex;
+  list-style:none;
+  margin-top: 30px;
+  margin-right: 50px;
+flex-flow:row wrap;
+   height: 30px;
+}
+
+.menu ul li{
+  margin-right: 10px;
+}
+a{
+  text-decoration: none;
+}
+.menu ul li a{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color:#fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: capitalize;
+  padding: 1px 25px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.menu ul li a:hover {
+  color:rgb(133, 97, 7) ;
+   border-bottom:2px solid rgb(133, 97, 7) ;
+   padding: 1px 25px
+}
+
+@media screen and (max-width: 768px) {
+  body{
+    height: 100%;
+  }
+  nav{
+    display:flex;
+    width: 100%;
+    flex-direction: column
+    
+  }
+
+.menu ul{
+  display: flex;
+  margin-top: 0;
+
+}
+
+  .menu ul li {
+    /* flex-basis: 100%; */
+
+    /* float: none;
+    display: block; */
+    /* margin: auto; */
+  }
+  .menu ul li a {
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #fb998c;
+  }
+}
+/* ==================== Nav Ends ==================== */
+
+/* ==================== Page banner start==================== */
+.banner-text{
+display: flex;
+padding: 8% 0;
+margin:  auto;
+width: 60%;
+text-align: center;
+flex-direction: column;
+/* color:rgb(133, 97, 7); */
+
+}
+.banner-text h2{
+  color:  rgb(95, 75, 25);
+font-size: 2.5em;
+margin-bottom: 20px;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+
+
+}
+.banner-text p{
+  font-size: 1.5em;
+  color: #fff;
+font-family:  'Trebuchet MS';
+}
+/* ==================== Page banner Ends ==================== */
+
+.top-logo{
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px; 
+}
+/* .navbar-logo{
+  width: 50px;
+  height: 100px;
+} */
+
+.submit-btn{
+  width: 150px;
+  height: 40px;
+  margin-top: 40px;
+  background-color:rgb(133, 97, 7) ;
+  cursor: pointer;
+  font-size: 18px;
+  color: azure;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+.submit-btn:hover{
+  background-color:rgb(22, 17, 4) ;
+border-radius: 10px;
+}
