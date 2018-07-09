@@ -1,0 +1,104 @@
+body{
+    /* height: 100%; */
+    background: url("./../img/bg.jpg") top center;  
+    width:100%;
+    height: 100vh;
+    background-size: cover;
+  }
+  nav{
+      background-color:black;
+      opacity: .6;
+  }
+main{
+    margin-top: 30px
+}
+.Sign-in-out{
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.form-div main h2{
+text-align: center;
+margin-bottom: 10px;
+}
+
+label{
+    color:rgb(212, 169, 58) ;
+font-weight: bold;
+}
+
+input[type=text]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=email]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=password]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    /* background-color:rgb(212, 169, 58) ; */
+
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+    opacity: .2;
+}
+
+div.Sign-in-out {
+    border-radius: 5px;
+    background-color: #0f0d0d;
+    
+    padding: 20px;
+}
+.Sign-in-out p{
+    color:#fff;
+    font-style: italic;
+    text-align:center;
+}
+.Sign-in-out a{
+    color:#45a049;
+    font-weight: bolder;
+    text-decoration: none;
+
+}
+
+
+@media screen and (max-width: 650px) {
+    .Sign-in-out{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .Sign-in-out{
+        width: 70%;
+    }
+}
