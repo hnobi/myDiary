@@ -1,13 +1,14 @@
-body{
+.body-image{
     /* height: 100%; */
-    background: url("./../img/bg.jpg") top center;  
+    background: url("./../img/bg.jpg") ;  
     width:100%;
-    height: 100vh;
+    height: auto;
     background-size: cover;
   }
   nav{
       background-color:black;
-      opacity: .6;
+      opacity:.9 ;
+      /* height: 20px;; */
   }
 main{
     margin-top: 30px
@@ -17,7 +18,9 @@ main{
     margin: 0 auto;
     margin-top: 30px;
 }
-.form-div main h2{
+
+
+main h2{
 text-align: center;
 margin-bottom: 10px;
 }
@@ -57,8 +60,6 @@ input[type=password]{
 
 input[type=submit] {
     width: 100%;
-    /* background-color:rgb(212, 169, 58) ; */
-
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -90,6 +91,17 @@ div.Sign-in-out {
     text-decoration: none;
 
 }
+
+.top-logo{
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+    padding-top: 0px; 
+    display: block;
+        margin-left: auto;
+        margin-right: auto;
+  }
+  
 
 
 @media screen and (max-width: 650px) {

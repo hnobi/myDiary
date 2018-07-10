@@ -1,48 +1,64 @@
+
 *{
   margin: 0;
   padding: 0;
 }
+
 body{
-  /* height: 100%; */
-  background: url("./../img/bg.jpg") bottom;  
   width:100%;
+  height: 100%; 
+}
+/* =============Landing page and signin/signup background image ========= */
+.body-image{
+  background: url("./../img/bg.jpg") bottom;  
   height: 100vh; 
-  background-color: black;
   background-size: cover;
 }
 
-/* ==================== Nav Start ==================== */
+
+/* =========================== Nav Start =========================== */
 nav{
   display:flex;
   width: 100%;
   height:auto;
-
+  justify-content: space-between;
+}
+.navcolor{
+  background:rgb(51, 49, 49);
 }
 nav > #logo {
-  flex:1;
+
   font-size: 25px;
   padding: 10px;;
-  margin-top: 15px;
+  margin: auto;
+  margin-left: 20px;
   font-weight: bold;
   min-width: 30px;
   font-family: 'Trebuchet MS';
 }
 nav > #logo a {
-  color:#fff;           
+  color:#fff;    
+         
+}
+li{
+  list-style: none;
 }
   .menu ul {
   display: flex;
   list-style:none;
-  margin-top: 30px;
+  margin-top: 15px;
 flex-wrap: wrap;
    height: 30px;
 }
 
-.menu ul li{
-  /* margin-right: 10px; */
-}
 a{
   text-decoration: none;
+}
+h2{
+  color:  black;
+font-size: 2.5em;
+margin-bottom: 20px;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 .menu ul li a{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -56,58 +72,16 @@ a{
 
 .menu ul li a:hover {
   color:rgb(133, 97, 7) ;
-   border-bottom:2px solid rgb(133, 97, 7) ;
    padding: 1px 25px
 }
+
 .footer{
   text-align:  center;
   margin-top:50px;
   margin-bottom: 0px;
 }
 
-@media screen and (max-width: 768px) {
-  body{
-    height: 100%;
-  }
-  nav{
-    /* display:flex; */
-    width: 100%;
-    display: block;
-    flex-direction:column;
-    align-items: center
-    
-  }
 
-.menu ul{
-  
-  display: flex;
-  margin-top: 0;
-  justify-content: center;
-/* flex-direction:column; */
-width: 100%;
-height: 90%;  
-
-}
-
-  .menu ul li {
-    /* flex-basis: 100%; */
-background:rgb(51, 49, 49);
-border-bottom: 1px solid #ffffff;
-opacity: .9;
-width: 100%;
-z-index: 1;
-text-align: center;
-padding:10px;
-
-  }
-  .menu ul li a {
-  margin: auto;
-  box-sizing: border-box;
-
-
-
-  }
-}
 /* ============================== Nav Ends ==================== ==============*/
 
 /* ============================== Page banner start========================== */
@@ -118,46 +92,165 @@ margin:  auto;
 width: 60%;
 text-align: center;
 flex-direction: column;
-/* color:rgb(133, 97, 7); */
-
 }
 .banner-text h2{
   color:  rgb(95, 75, 25);
-font-size: 2.5em;
-margin-bottom: 20px;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-
-
 }
 .banner-text p{
   font-size: 1.5em;
   color: #fff;
 font-family:  'Trebuchet MS';
 }
+
 /* ===================================== Page banner Ends ================================== */
 
-.top-logo{
-  width: 70px;
-  height: 70px;
-  margin-bottom: 20px;
-  padding-top: 0px; 
-}
-/* .navbar-logo{
-  width: 50px;
-  height: 100px;
-} */
+/* =========================  Button style Start ======================================= */
+button{
+  cursor: pointer;
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 
+}
 .submit-btn{
   width: 150px;
   height: 40px;
   margin-top: 40px;
   background-color:rgb(133, 97, 7) ;
-  cursor: pointer;
-  font-size: 18px;
   color: azure;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 .submit-btn:hover{
   background-color:rgb(22, 17, 4) ;
 border-radius: 10px;
 }
+
+
+
+/* ++++++++++ Hexadecimal entities for the icons +++++++++++*/
+
+.add:before {
+  content: "\271A";
+}
+
+.edit:before {
+  content: "\270E";        
+}
+
+.delete:before {
+  content: "\2718";        
+}
+
+.save:before {
+  content: "\2714";        
+}
+
+.email:before {
+  content: "\2709";        
+}
+
+/* =========================  Button style Start ======================================= */
+
+/* ===================== My Entry section start  ================================== */
+section{
+  width:90%;
+  margin:80px auto;
+}
+h2.heading{
+text-align: center;
+font-family: 'Franklin Gothic Medium';
+}
+table{
+  margin:40px auto ;
+  color:#fff;
+  border: 1px solid rgb(133, 97, 7);
+  width:100%
+
+}
+
+
+tr:nth-of-type(odd) {
+  background:rgb(94, 87, 87);
+
+}
+tr:nth-of-type(even) {
+  background: rgb(27, 27, 25);
+  font-size: 16px;
+}
+
+th {
+  background:rgb(133, 97, 7);
+  color: white;
+  font-weight: bold;
+}
+
+td, th {
+  padding: 10px;
+  text-align: left;
+  font-size: 16px;
+}
+.view-button{
+  background-color: rgb(4, 78, 4);
+  color: #fff;
+  padding: 8px;
+  font-size: 12px;
+  /* border-radius: 5px */
+}
+.view-button:hover{
+  background-color: rgb(2, 26, 2);
+  color: #fff
+}
+
+
+  
+/* ===================== My Entry section Ends  ================================== */
+
+/* Media Quaries */
+@media screen and (max-width: 760px) {
+  body{
+    height: 100%;
+  }
+  nav{
+    width: 100%;
+    display: block;
+    flex-direction:column;
+    align-items: center
+  }
+.menu ul{
+  display: flex;
+  margin-top: 0;
+  justify-content: center;
+   width: 100%;
+   height: 90%;  
+
+}
+
+.menu ul li {
+ background:rgb(51, 49, 49);
+ border-bottom: 1px solid #ffffff;
+ opacity: .9;
+ width: 100%;
+ z-index: 1;
+ text-align: center;
+ padding:10px;
+  }
+  .menu ul li a {
+  margin: auto;
+  box-sizing: border-box;
+  }
+
+  /*my entries  */
+  table,  tbody, th, td, tr {
+    /* display:block; */
+    display: flex;
+    flex-direction: column;       
+  }
+}
+
+
+
+
+
+
+
+
+
+

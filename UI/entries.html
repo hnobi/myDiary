@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+  <script src="main.js"></script>
+</head>
+
+<body>
+  <nav class="navcolor">
+    <div id="logo">
+      <a href="index.html"> My Diary</a>
+    </div>
+    <div style="margin: auto;">
+      <p style="height: 27px;color:white"> Total entries:
+        <span>0</span>
+      </p>
+    </div>
+
+    <div class="search-entry-title" style="margin: auto;">
+      <button class=" save" style="font-size: 17px;height: 32px">
+        Search
+      </button>
+      <input type="text" placeholder="title" style="height: 27px;width:300px;border-radius: 3px;
+      padding: 2px;      font-size: 17px;color: brown">
+    </div>
+    <div class="menu">
+      <ul>
+        <li>
+          <a href="add-entry.html" class="butto add">Add new entry</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+  <section>
+    <h2 class="heading">My Entries</h2>
+    <!-- <div class="all-entries"> -->
+    <table id="entries-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th>Entry</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>22-10-2018</td>
+          <td>My day</td>
+          <td>I love being a able to look back ...</td>
+          <td>
+            <button class="view-button">View Entry</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>12-02-2018</td>
+          <td>My hommie</td>
+          <td> the he left for new york... </td>
+          <td>
+            <button class="view-button">View Entry</button>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>22-10-2018</td>
+          <td>My day</td>
+          <td>I love being a able to look back ...</td>
+          <td>
+            <button class="view-button">View Entry</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>12-02-2018</td>
+          <td>My hommie</td>
+          <td> the he left for new york... </td>
+          <td>
+            <button class="view-button">View Entry</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- </div> -->
+  </section>
+
+  <p class="footer " style="color: rgb(95, 75, 25); margin-bottom: 20px;"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+</body>
+
+</html>
