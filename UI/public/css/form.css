@@ -25,10 +25,7 @@ text-align: center;
 margin-bottom: 10px;
 }
 
-label{
-    color:rgb(212, 169, 58) ;
-font-weight: bold;
-}
+
 
 input[type=text]{
     width: 100%;
@@ -103,10 +100,14 @@ div.Sign-in-out {
   }
   
 
-
-@media screen and (max-width: 650px) {
+  @media screen and (max-width: 930px) {
     .Sign-in-out{
         width: 50%;
+    }
+}
+@media screen and (max-width: 650px) {
+    .Sign-in-out{
+        width: 55%;
     }
 }
 @media screen and (max-width: 400px) {

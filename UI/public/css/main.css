@@ -7,13 +7,122 @@
 body{
   width:100%;
   height: 100%; 
+  background: url("./../img/bg3.jpg") top;  
+  background-size: cover;
 }
-/* =============Landing page and signin/signup background image ========= */
 .body-image{
   background: url("./../img/bg.jpg") bottom;  
   height: 100vh; 
   background-size: cover;
 }
+.container {
+  display: flex;
+  border-radius: 5px ;
+  border: 2px solid #000;
+  background-color: #f2f2f2;
+  padding: 20px;
+  justify-content: center;
+  width: 70%;
+  margin: auto
+}
+.container.view-entry{
+  width: 90%;
+border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.title,.date,.entry{
+  margin-bottom: 15px;
+}
+.title h3,.date h3,.entry h3{
+  border-bottom: 1px solid rgb(179, 167, 167);
+color :rgb(212, 169, 58);
+margin-bottom: 10px;
+padding-bottom: 2px;
+}
+
+form{
+  display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+ textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgb(133, 97, 7) ;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+input[type=text],input[type=date] {
+  /* margin:0 auto; */
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgb(133, 97, 7) ;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 150px;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+/* profile imgs */
+.user {
+  /* display: inline-block; */
+  margin: auto 0;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+
+.user img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+/* profile imgs ends */
+
+/* top log start */
+.nav-logo {
+  padding: 0 25px;
+  height: 40px;
+  font-size: 16px;
+  /* line-height: 40px; */
+  border-radius: 25px;
+  /* background-color: #f1f1f1; */
+}
+
+.nav-log img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  /* height: 40px; */
+  width: 40px;
+  border-radius: 50%;
+}
+/* top logo ends */
+
 
 
 /* =========================== Nav Start =========================== */
@@ -28,9 +137,9 @@ nav{
 }
 nav > #logo {
 
-  font-size: 25px;
-  padding: 10px;;
-  margin: auto;
+  font-size: 20px;
+  padding: 10px;
+  /* margin: auto; */
   margin-left: 20px;
   font-weight: bold;
   min-width: 30px;
@@ -50,7 +159,10 @@ li{
 flex-wrap: wrap;
    height: 30px;
 }
-
+label{
+  color:rgb(212, 169, 58) ;
+font-weight: bold;
+}
 a{
   text-decoration: none;
 }
@@ -73,6 +185,22 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubun
 .menu ul li a:hover {
   color:rgb(133, 97, 7) ;
    padding: 1px 25px
+}
+search-entry-title{
+  margin: auto;
+}
+.search-entry-title input[type="text"]{
+  height: 30px;
+ width:300px;
+  border-radius: 3px;
+  padding: 2px;
+   font-size: 17px;
+   color: brown;
+   margin-top: 15px
+}
+.search-entry-title button{
+  height: 28px;
+  margin-top:15px;
 }
 
 .footer{
@@ -111,12 +239,40 @@ button{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 
 }
+.edit-btn{
+  background-color: rgb(194, 194, 194);
+  width:100px;
+  border-radius: 6px;
+
+}
+.edit-btn:hover{
+  background-color: rgb(90, 87, 87);
+  border-radius: 10px;
+  color: #f1f1f1;
+}
+
+.delete-btn{
+  background-color: rgb(194, 194, 194);
+  width:100px;
+  border-radius: 6px;
+
+}
+.delete-btn:hover{
+  background-color: rgb(90, 87, 87);
+  border-radius: 10px;
+  color:red;
+}
+
+
+
+
 .submit-btn{
   width: 150px;
   height: 40px;
   margin-top: 40px;
   background-color:rgb(133, 97, 7) ;
   color: azure;
+  border-radius: 5px
 }
 .submit-btn:hover{
   background-color:rgb(22, 17, 4) ;
@@ -132,16 +288,20 @@ border-radius: 10px;
 }
 
 .edit:before {
-  content: "\270E";        
+  content: "\270E"; 
+  color:purple;
+  padding: 2px;      
 }
 
 .delete:before {
-  content: "\2718";        
+  content: "\2718"; 
+  color: red;       
 }
 
 .save:before {
   content: "\2714";        
 }
+
 
 .email:before {
   content: "\2709";        
@@ -161,25 +321,36 @@ font-family: 'Franklin Gothic Medium';
 table{
   margin:40px auto ;
   color:#fff;
-  border: 1px solid rgb(133, 97, 7);
-  width:100%
-
+  /* border: 1px solid rgb(133, 97, 7); */
+  width:90%;
+  border-collapse: collapse; 
+  border-spacing: 0;
+  
 }
-
+th:first-child {
+  border-radius: 6px 0 0 0;
+}
+th:last-child {
+  border-radius: 0 6px 0 0 ;
+}
 
 tr:nth-of-type(odd) {
   background:rgb(94, 87, 87);
+  opacity: .9;
 
 }
 tr:nth-of-type(even) {
   background: rgb(27, 27, 25);
-  font-size: 16px;
+  opacity: .8;
+  /* font-size: 16px; */
 }
 
 th {
   background:rgb(133, 97, 7);
   color: white;
   font-weight: bold;
+  /* opacity: .9; */
+
 }
 
 td, th {
@@ -210,17 +381,43 @@ td, th {
   }
   nav{
     width: 100%;
-    display: block;
+    /* display: block; */
+    display: flex;
     flex-direction:column;
     align-items: center
   }
+  .search-entry-title{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+  .search-entry-title button{
+    width:100px;
+    align-self: center;
+  }
+  .search-entry-title input[type= "text"]{
+    width:100%;
+  }
+
+  nav > #logo {
+    font-size: 20px;
+    }
+    h2.heading{
+font-size: 32px;
+    }
+    section{
+      margin-top: 10px;
+
+    }
+  .menu{
+    width: 100%;
+
+  }
 .menu ul{
   display: flex;
-  margin-top: 0;
+  margin-top: 5px;
   justify-content: center;
-   width: 100%;
-   height: 90%;  
-
+   height: 50%;  
 }
 
 .menu ul li {
@@ -239,11 +436,15 @@ td, th {
 
   /*my entries  */
   table,  tbody, th, td, tr {
-    /* display:block; */
     display: flex;
-    flex-direction: column;       
+    flex-direction: column; 
+        /* display:block; */  
   }
 }
+
+
+/*  */
+
 
 
 
