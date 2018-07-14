@@ -8,7 +8,7 @@ const Entries = [
   {
     id: 2,
     title: 'black strive',
-    date: '07-15-2018',
+    date: '07-16-2018',
     entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory'
   },
   {
