@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// import apiRoute from './routes/apiRoutes';
+import apiRoute from './routes/apiRoutes';
 
 const app = express();
 const port = parseInt((process.env.PORT), 10) || 3000;
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
       message: 'Welcome to My Diary application',
     });
 });
-// app.use('/api/v1', apiRoute);
+app.use('/api/v1', apiRoute);
 app.use('*', (req, res) => {
   res.status(404);
   res.json({

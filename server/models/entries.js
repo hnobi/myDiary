@@ -1,4 +1,4 @@
-const Entries = [
+const entries = [
   {
     id: 1,
     title: 'the great day',
@@ -18,3 +18,6 @@ const Entries = [
     entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory'
   }
 ]
+
+
+export default entries
