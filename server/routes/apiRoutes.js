@@ -1,13 +1,14 @@
 import express from 'express';
-import EntryController from './../controllers/entry';
+import EntryControllers from './../controllers/entry';
+import EntryValidations from './../middlewares/entry';
 
 
 const router = express.Router();
 
 
 // entry
-router.route('/entry')
-  .post(EntryController.addEntry);
+router.route('/entries')
+  .post(EntryValidations.addEntryVaLidation, EntryControllers.addEntry);
 
 
 

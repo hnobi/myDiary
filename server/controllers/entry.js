@@ -16,7 +16,7 @@ export default class EntryController {
   static addEntry(req, res) {
     entryData.forEach((element) => {
       if (element.title === req.body.title) {
-        return res.json({ message: 'title already exist' });
+        return res.json({ message: 'title of entry already exist ' });
       }
     });
     const NewId = entryData[entryData.length - 1].id + 1
