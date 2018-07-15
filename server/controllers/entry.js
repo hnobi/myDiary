@@ -67,7 +67,7 @@ export default class EntryController {
     if (entryData.length !== 0) {
       return res.status(200).json({
         status: 'Success',
-        message: `you have a total of ${entryData.length} entries in your diary`,
+        message: `Successsfully retrieved all diary entries with total of ${entryData.length} entries`,
         entryData
       })
     }
@@ -76,8 +76,23 @@ export default class EntryController {
     })
   }
 
+  static getEntry(req, res) {
+    for (let i = 0; i < entryData.length; i += 1) {
+      if (entryData[i].id === parseInt(req.params.entryId, 10)) {
+        return res.status(200)
+          .json({
+            status: 'Success',
+            message: 'Successfully retrieve an entry',
+            Entry: entryData[i]
+          })
+      }
+    }
 
+    return res.status(404)
+      .json({
+        status: 'Failed',
+        message: 'Page not found'
+      })
 
-
-
+  }
 }

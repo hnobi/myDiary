@@ -13,6 +13,7 @@ router.route('/entries')
 
 router.route('/entries/:entryId')
   .put(EntryValidations.modifyEntryVaLidation, EntryControllers.modifyEntry)
+  .get(EntryControllers.getEntry)
 
 
 
