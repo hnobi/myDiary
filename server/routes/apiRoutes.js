@@ -8,7 +8,9 @@ const router = express.Router();
 
 // entry
 router.route('/entries')
-  .post(EntryValidations.addEntryVaLidation, EntryControllers.addEntry);
+  .post(EntryValidations.addEntryVaLidation, EntryControllers.addEntry)
+  .get(EntryControllers.getAllEntry)
+
 router.route('/entries/:entryId')
   .put(EntryValidations.modifyEntryVaLidation, EntryControllers.modifyEntry)
 
