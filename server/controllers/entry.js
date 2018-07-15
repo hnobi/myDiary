@@ -38,7 +38,13 @@ export default class EntryController {
         entryData
       });
   }
-
+  /**
+      * Modify a particular entry from the entry model
+      * @param {obj} req
+      * @param {obj} res
+      * @returns {obj} insertion error messages or success messages
+      *  @memberof EntryController
+      */
   static modifyEntry(req, res) {
     const {
       title, date, entry
@@ -62,7 +68,13 @@ export default class EntryController {
       message: 'entry id does not exist',
     });
   }
-
+  /**
+      * Get all entries from the entry model
+      * @param {obj} req
+      * @param {obj} res
+      * @returns {obj} insertion error messages or success messages
+      * @memberof EntryController
+      */
   static getAllEntry(req, res) {
     if (entryData.length !== 0) {
       return res.status(200).json({
@@ -75,7 +87,12 @@ export default class EntryController {
       message: 'No entry in your diary'
     })
   }
-
+  /**
+      * Get a particular entry from the entry model
+      * @param {obj} req
+      * @param {obj} res
+      * @returns {obj} insertion error messages or success messages
+      */
   static getEntry(req, res) {
     for (let i = 0; i < entryData.length; i += 1) {
       if (entryData[i].id === parseInt(req.params.entryId, 10)) {
@@ -93,6 +110,30 @@ export default class EntryController {
         status: 'Failed',
         message: 'Page not found'
       })
-
+  }
+  /**
+     * Deletes a particular entry from the entry model
+     * @param {obj} req
+     * @param {obj} res
+     * @returns {obj} insertion error messages or success messages
+     * @memberof EntryController
+     */
+  static deleteEntry(req, res) {
+    for (let i = 0; i < entryData.length; i++) {
+      if (entryData[i].id === parseInt(req.params.entryId, 10)) {
+        entryData.splice(i, 1);
+        return res.status(200)
+          .json({
+            status: 'Success',
+            message: 'Successfully deleted entry',
+            entryData
+          });
+      }
+    }
+    return res.status(400)
+      .json({
+        status: 'failed',
+        message: 'events id does not exist',
+      })
   }
 }
