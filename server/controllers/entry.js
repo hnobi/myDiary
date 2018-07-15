@@ -63,6 +63,21 @@ export default class EntryController {
     });
   }
 
+  static getAllEntry(req, res) {
+    if (entryData.length !== 0) {
+      return res.status(200).json({
+        status: 'Success',
+        message: `you have a total of ${entryData.length} entries in your diary`,
+        entryData
+      })
+    }
+    return res.status(200).json({
+      message: 'No entry in your diary'
+    })
+  }
+
+
+
 
 
 }
