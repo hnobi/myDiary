@@ -256,5 +256,18 @@ describe('All test cases for MyDiary application', () => {
           done();
         });
     });
+    it('should return `400` status code with `res.body` error messages', (done) => {
+      request.delete('/api/v1/entries/9')
+        .set('Content-Type', 'application/json')
+        .expect(400)
+        .end((err, res) => {
+          expect(res.body).deep.equal({
+            status: 'failed',
+            message: 'events id does not exist',
+          });
+          if (err) done(err);
+          done();
+        });
+    });
   });
 });
