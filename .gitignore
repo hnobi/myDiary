@@ -2,3 +2,8 @@
 
 # dependencies
 /node_modules
+
+# folders
+.vscode
+coverage
+.nys_output
