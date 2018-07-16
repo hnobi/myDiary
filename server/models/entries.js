@@ -17,7 +17,7 @@ const entries = [
     date: '13-22-2017',
     entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory'
   }
-]
+];
 
 
-export default entries
+export default entries;

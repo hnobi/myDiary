@@ -22,5 +22,5 @@ app.use('*', (req, res) => {
     message: 'Page not found'
   });
 });
-app.listen(port, () => console.log(`Application listening  on port ${port}`));
+app.listen(port, () => { console.log(`Application listening  on port ${port}`) });
 export default app;

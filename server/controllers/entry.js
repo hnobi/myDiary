@@ -120,7 +120,7 @@ export default class EntryController {
      * @memberof EntryController
      */
   static deleteEntry(req, res) {
-    for (let i = 0; i < entryData.length; i++) {
+    for (let i = 0; i < entryData.length; i += 1) {
       if (entryData[i].id === parseInt(req.params.entryId, 10)) {
         entryData.splice(i, 1);
         return res.status(200)

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": " nodemon --watch server --exec babel-node -- server/app.js"
+    "start": " nodemon --watch server --exec babel-node -- server/app.js",
+    "test": "mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/"
   },
   "repository": {
     "type": "git",
