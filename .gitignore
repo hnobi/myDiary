@@ -6,4 +6,4 @@
 # folders
 .vscode
 coverage
-.nys_output
+.nyc_output
