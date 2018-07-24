@@ -1,6 +1,6 @@
 import express from 'express';
-import EntryControllers from '../controllers/entry';
-import EntryValidations from '../middlewares/entry';
+import EntryControllers from '../controllers/entryController';
+import EntryValidations from '../middlewares/entryValidation';
 
 
 const router = express.Router();
