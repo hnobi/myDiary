@@ -67,8 +67,8 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
-    opacity: .2;
+    background-color: darkgreen;
+    opacity: .8;
 }
 
 div.Sign-in-out {
