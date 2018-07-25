@@ -23,19 +23,27 @@ body{
   padding: 20px;
   justify-content: center;
   width: 70%;
-  margin: 40px auto
+  margin: 20px auto
 }
-.container.view-entry{
+.view-entry{
   width: 90%;
 border: none;
   display: flex;
   flex-direction: column;
+  height:450px;
+  margin-top: 10px
 }
-
+.entry #content{
+height:200px
+}
+.entry{
+     overflow: auto;
+	 height:400px;
+}
 .title,.date,.entry{
   margin-bottom: 15px;
 }
-.title h3,.date h3,.entry h3{
+.title h3,.date h3,.view-entry h3{
   border-bottom: 1px solid rgb(179, 167, 167);
 color :rgb(212, 169, 58);
 margin-bottom: 10px;
@@ -58,8 +66,21 @@ form{
   margin-bottom: 16px;
 }
 
+
+.search-entry-title input:hover[type=text]{
+box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.search-entry-title button{
+  background-color:rgb(9, 128, 161);
+  color: #fff;
+}
+.search-entry-title button:hover{
+  background-color:rgb(13, 89, 110);
+}
+
 input[type=text],input[type=date]{
-  /* margin:0 auto; */
   width: 100%;
   padding: 12px;
   border: 1px solid rgb(133, 97, 7) ;
@@ -82,7 +103,23 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
-
+.trasparent-bg{
+  background:#212121;
+  opacity:0.7;
+}
+main#user-details{
+  display: flex; 
+  background-color: rgb(90, 87, 87);
+  opacity:.9;
+  width: 80%;
+  /*flex-direction: column;*/
+  margin:40px auto
+}
+#user-details img{
+  border-radius: 20px; 
+  border:1px solid #fff;
+  height:200px
+}
 /* profile imgs */
 .user {
   /* display: inline-block; */
@@ -174,7 +211,7 @@ a{
   text-decoration: none;
 }
 h2{
-  color:  black;
+ color: #ffe57f;;
 font-size: 2.5em;
 margin-bottom: 20px;
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
@@ -210,12 +247,6 @@ search-entry-title{
   margin-top:15px;
 }
 
-.footer{
-  text-align:  center;
-  margin-top:50px;
-  margin-bottom: 0px;
-}
-
 
 /* ============================== Nav Ends ==================== ==============*/
 
@@ -228,15 +259,23 @@ width: 60%;
 text-align: center;
 flex-direction: column;
 }
-.banner-text h2{
-  color:  rgb(95, 75, 25);
-}
+/*.banner-text h2{
+  color: #ffe57f;
+}*/
 .banner-text p{
   font-size: 1.5em;
   color: #fff;
 font-family:  'Trebuchet MS';
 }
-
+.footer{
+  color:#ffe57f;
+   text-align:  center;
+   margin-bottom: 0px;
+   margin-top: 70px;
+   /*background-color: #212121;*/
+   height: 100px;
+   
+}
 /* ===================================== Page banner Ends ================================== */
 
 /* =========================  Button style Start ======================================= */
@@ -281,7 +320,7 @@ button{
   width: 150px;
   height: 40px;
   margin-top: 40px;
-  background-color:rgb(133, 97, 7) ;
+  background-color:rgb(123, 97, 40) ;
   color: azure;
   border-radius: 5px;
   
@@ -324,7 +363,7 @@ border-radius: 10px;
 /* ===================== My Entry section start  ================================== */
 section{
   width:90%;
-  margin:80px auto;
+  margin:10px auto;
 }
 h2.heading{
 text-align: center;
