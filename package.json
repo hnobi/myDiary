@@ -1,0 +1,41 @@
+{
+  "name": "mydiary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node -- server/app.js",
+    "start:dev": " nodemon --watch server --exec babel-node -- server/app.js",
+    "test": "nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hnobi/myDiary.git"
+  },
+  "author": "Hammed Noibi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hnobi/myDiary/issues"
+  },
+  "homepage": "https://github.com/hnobi/myDiary#readme",
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "express": "^4.16.3",
+    "mocha": "^5.2.0",
+    "supertest": "^3.1.0",
+    "validator": "^10.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "nodemon": "^1.18.2",
+    "nyc": "^12.0.2"
+  }
+}
