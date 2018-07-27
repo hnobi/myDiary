@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL;
 
-const client = new Client(connectString);
+const client = new Client(connectionString);
 
 client.connect();
 
