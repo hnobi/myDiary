@@ -1,10 +1,13 @@
 import express from 'express';
 import EntryControllers from '../controllers/entryController';
 import EntryValidations from '../middlewares/entryValidation';
-
+import UsersControllers from '../controllers/usersController';
+import UserValidation from '../middlewares/userValidation';
 
 const router = express.Router();
-
+// User signup and signin
+router.route('/auth/signup')
+  .post(UserValidation.signUp, UsersControllers.signUp);
 
 // entry
 router.route('/entries')

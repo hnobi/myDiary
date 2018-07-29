@@ -3,7 +3,11 @@
 # dependencies
 /node_modules
 
+
 # folders
 .vscode
 coverage
 .nyc_output
+
+.env
+.coveralls.yml
