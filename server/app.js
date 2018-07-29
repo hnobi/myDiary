@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import apiRoute from './routes/router';
 
+
 const app = express();
 const port = parseInt((process.env.PORT), 10) || 3000;
 
@@ -22,5 +23,5 @@ app.use('*', (req, res) => {
     message: 'Page not found'
   });
 });
-app.listen(port, () => { console.log(`Application listening  on port ${port}`) });
+app.listen(port, () => { console.log(`Application listening  on port ${port}`); });
 export default app;

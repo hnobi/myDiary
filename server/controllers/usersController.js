@@ -18,10 +18,11 @@ export default class UsersController {
     db.query(`SELECT id FROM users WHERE email = '${email}' OR username = '${username}'`)
       .then((userfound) => {
         if (userfound.rows.length > 0) {
-          return res.status(400)
+          // read on github.com/docker/docker-registry/issues/10 => that this is better to be 409(conflict) since it not an error
+          return res.status(409)
             .json({
               status: 'Failed',
-              message: `User ${username} already exist`
+              message: 'User already exist'
             });
         }
         const sql = 'INSERT INTO users(fullname , username, email, password) VALUES ($1, $2,$3,$4)';
@@ -33,7 +34,7 @@ export default class UsersController {
                 status: 'Success',
                 message: 'Successfully created myDiary account',
                 data: {
-                  id: user,
+                  id: user.rows,
                   username: req.body.username,
                   email: req.body.email,
                   password: hashedPassword

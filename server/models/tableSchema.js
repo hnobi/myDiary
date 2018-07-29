@@ -47,7 +47,6 @@ const createTable = () => {
   
      )`;
 
-
   client.query(
     query, (err) => {
       if (err) {

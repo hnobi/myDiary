@@ -62,6 +62,32 @@ describe('All test cases for MyDiary application', () => {
         });
     });
   });
+  describe('All test cases for Users', () => {
+    describe('All test cases for user signUp ', () => {
+      describe('All success test cases for user signUp ', () => {
+        const userInfo = {
+          fullname: 'Hammed Noibi',
+          username: 'hnobi',
+          email: 'hnobi09@yahoo.com',
+          password: '12345678'
+        };
+        it('should create a new user account and return a `201`', (done) => {
+          request.post('/api/v1/auth/signup')
+            .send(userInfo)
+            .expect(201)
+            .end((err, res) => {
+              expect(res.body.status).to.equal('Success');
+              expect(res.body.message).to.equal('Successfully created myDiary account');
+              expect(res.body.data.username).to.equal('hnobi');
+              expect(res.body.data.email).to.equal('hnobi08@yahoo.com');
+              if (err) done(err);
+              done();
+            });
+        });
+      });
+    });
+  });
+
   describe('All test cases for adding entry to the application', () => {
     describe('All  test cases of wrong input for adding entry ', () => {
       it('should return a `400` status code with res.body error message', (done) => {

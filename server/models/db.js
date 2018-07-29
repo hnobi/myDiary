@@ -5,7 +5,7 @@ dotenv.config();
 const connectionString = process.env.DATABASE_URL;
 const db = new Pool({ connectionString });
 db.connect().then(() => {
-  console.log('Connection succefully');
+  console.log(' succefully connected to postgr');
 }).catch((err) => {
   console.log(err.message);
 });

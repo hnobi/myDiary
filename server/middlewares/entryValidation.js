@@ -5,13 +5,13 @@ import validator from 'validator';
  */
 export default class EntryValidation {
   /**
-  * Validates addEntry before allowing access to controller class
-  * @param {obj} req
-  * @param {obj} res
-  * @param {obj} next
-  * @memberof EntryValidation
-  * @returns {obj} validation error messages object or contents of request.body object
- */
+            * Validates addEntry before allowing access to controller class
+            * @param {obj} req
+            * @param {obj} res
+            * @param {obj} next
+            * @memberof EntryValidation
+            * @returns {obj} validation error messages object or contents of request.body object
+           */
   static addEntryVaLidation(req, res, next) {
     const { title, date, entry } = req.body,
       errors = {};
@@ -47,12 +47,12 @@ export default class EntryValidation {
   }
 
   /**
-   * @param {obj} req
-   * @param {obj} res
-   *  @param {obj} next
-   * @memberof EntryValidation
-   * @returns {obj} validation error messages object or contents of request.body object
-   */
+             * @param {obj} req
+             * @param {obj} res
+             *  @param {obj} next
+             * @memberof EntryValidation
+             * @returns {obj} validation error messages object or contents of request.body object
+             */
   static modifyEntryVaLidation(req, res, next) {
     const { title, entry } = req.body,
       errors = {};
