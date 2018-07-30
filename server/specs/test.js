@@ -62,32 +62,153 @@ describe('All test cases for MyDiary application', () => {
         });
     });
   });
+
   describe('All test cases for Users', () => {
     describe('All test cases for user signUp ', () => {
-      describe('All success test cases for user signUp ', () => {
-        const userInfo = {
-          fullname: 'Hammed Noibi',
-          username: 'hnobi',
-          email: 'hnobi09@yahoo.com',
-          password: '12345678'
-        };
-        it('should create a new user account and return a `201`', (done) => {
-          request.post('/api/v1/auth/signup')
-            .send(userInfo)
-            .expect(201)
-            .end((err, res) => {
-              expect(res.body.status).to.equal('Success');
-              expect(res.body.message).to.equal('Successfully created myDiary account');
-              expect(res.body.data.username).to.equal('hnobi');
-              expect(res.body.data.email).to.equal('hnobi08@yahoo.com');
-              if (err) done(err);
-              done();
+      const userInfo = {
+        fullname: 'Hammed Noibi',
+        username: 'hnobi',
+        email: 'hnobi09@yahoo.com',
+        password: '12345678'
+      };
+      it('should create a new user account and return a `201`', (done) => {
+        request.post('/api/v1/auth/signup')
+          .send(userInfo)
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Successfully created myDiary account');
+            expect(res.body.data.username).to.equal('hnobi');
+            expect(res.body.data.email).to.equal('hnobi09@yahoo.com');
+            if (err) done(err);
+            done();
+          });
+      });
+      it('should  check if user already in the database and return a `409`', (done) => {
+        request.post('/api/v1/auth/signup')
+          .send(userInfo)
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Failed');
+            expect(res.body.message).to.equal('User already exist');
+            done();
+          });
+      });
+      it('should  not create a new user account and return a `400`', (done) => {
+        request.post('/api/v1/auth/signup')
+          .send({})
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body).deep.equal({
+              message: 'All or some of the field is/are undefined'
             });
-        });
+            done();
+          });
+      });
+      it('should  not create a new user account and return a `400`', (done) => {
+        request.post('/api/v1/auth/signup')
+          .send({
+            fullname: '',
+            username: '',
+            email: '',
+            password: ''
+          })
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.errors.fullname).to.equal('fullname  is required');
+            expect(res.body.errors.username).to.equal('username  is required');
+            expect(res.body.errors.email).to.equal('email is required');
+            expect(res.body.errors.password).to.equal('password  is required');
+            done();
+          });
+      });
+      it('should  not create a new user account and return a `400`', (done) => {
+        request.post('/api/v1/auth/signup')
+          .send({
+            fullname: '300hamed',
+            username: 'h',
+            email: 'hboy.com',
+            password: 'dddd'
+          })
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.errors.fullname).to.equal('fullname  must not contain numbers');
+            expect(res.body.errors.username).to.equal('username must be between 2 to 100 characters');
+            expect(res.body.errors.email).to.equal('Enter a valid email address');
+            expect(res.body.errors.password).to.equal('password must be eight character or more');
+            done();
+          });
+      });
+    });
+    describe('All test cases for user signIn ', () => {
+      const userInfo = {
+        username: 'hnobi',
+        password: '12345678'
+      };
+      it('should Login  a new user and return a `201`', (done) => {
+        request.post('/api/v1/auth/signin')
+          .send(userInfo)
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('successfull login');
+            expect(res.body.data.username).to.equal('hnobi');
+            expect(res.body.data.email).to.equal('hnobi09@yahoo.com');
+            done();
+          });
+      });
+      it('should not Login  a new user and return a `500`', (done) => {
+        request.post('/api/v1/auth/signin')
+          .send({
+            username: 'wronguser',
+            password: '12345678'
+          })
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Failed');
+            expect(res.body.message).to.equal('invalid username or password');
+            done();
+          });
+      });
+      it('should  not login new user account and return a `400`', (done) => {
+        request.post('/api/v1/auth/signup')
+          .send({})
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body).deep.equal({
+              message: 'All or some of the field is/are undefined'
+            });
+            done();
+          });
+      });
+      it('should  not login a new user account and return a `400`', (done) => {
+        request.post('/api/v1/auth/signin')
+          .send({
+            username: '',
+            password: ''
+          })
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.errors.username).to.equal('username  is required');
+            expect(res.body.errors.password).to.equal('password  is required');
+            done();
+          });
+      });
+      it('should  not login a new user account and return a `400`', (done) => {
+        request.post('/api/v1/auth/signin')
+          .send({
+            username: 'h',
+            password: 'dddd'
+          })
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.errors.username).to.equal('username must be between 2 to 100 characters');
+            expect(res.body.errors.password).to.equal('password must be eight character or more');
+            done();
+          });
       });
     });
   });
-
   describe('All test cases for adding entry to the application', () => {
     describe('All  test cases of wrong input for adding entry ', () => {
       it('should return a `400` status code with res.body error message', (done) => {
@@ -102,7 +223,6 @@ describe('All test cases for MyDiary application', () => {
           .end((err, res) => {
             expect(res.body.errors.title).to.equal('Entry title must not contain numbers');
             expect(res.body.errors.entry).to.equal('Diary entry provided must be between 10 to 2000 characters');
-
             if (err) done(err);
             done();
           });
@@ -120,7 +240,6 @@ describe('All test cases for MyDiary application', () => {
             expect(res.body.errors.title).to.equal('Title of entry is required');
             expect(res.body.errors.date).to.equal('date is required');
             expect(res.body.errors.entry).to.equal('Diary entry is required');
-
             if (err) done(err);
             done();
           });
@@ -138,28 +257,27 @@ describe('All test cases for MyDiary application', () => {
             done();
           });
       });
-
-      describe('Test case of correct input for adding entry ', () => {
-        it('should return a `201` status code with res.body success message', (done) => {
-          request.post('/api/v1/entries')
-            .set('Content-Type', 'application/json')
-            .send({
-              date: '13-22-2017',
-              entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory',
-              title: 'panther partytwo'
-            })
-            .expect(201)
-            .end((err, res) => {
-              expect(res.body).deep.equal({
-                status: 'Success',
-                message: 'Successfully added new entry',
-                entryData
-              });
-
-              if (err) done(err);
-              done();
+    });
+    describe('Test case of correct input for adding entry ', () => {
+      it('should return a `201` status code with res.body success message', (done) => {
+        request.post('/api/v1/entries')
+          .set('Content-Type', 'application/json')
+          .send({
+            date: '13-22-2017',
+            entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory',
+            title: 'panther partytwo'
+          })
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body).deep.equal({
+              status: 'Success',
+              message: 'Successfully added new entry',
+              entryData
             });
-        });
+
+            if (err) done(err);
+            done();
+          });
       });
     });
   });

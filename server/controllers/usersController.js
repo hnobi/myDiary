@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import db from '../models/db';
+
 
 /**
  * @export
@@ -29,19 +31,19 @@ export default class UsersController {
         const params = [fullname, username, email, hashedPassword];
         db.query(sql, params)
           .then((user) => {
-            res.status(201)
+            return res.status(201)
               .json({
                 status: 'Success',
                 message: 'Successfully created myDiary account',
                 data: {
-                  id: user.rows,
+                  id: user.rows[0].id,
                   username: req.body.username,
                   email: req.body.email,
                   password: hashedPassword
                 }
               });
           }).catch((err) => {
-            res.status(500).json({
+            return res.status(500).json({
               status: 'Failed',
               message: err.message
             });
@@ -50,5 +52,48 @@ export default class UsersController {
         status: 'Failed',
         message: err.message
       }));
+  }
+
+  /**
+   * @param {obj} req
+   * @param {obj} res
+   * @memberof UsersController
+   *  @returns {obj} insertion error messages or success message
+   */
+  static signIn(req, res) {
+    const { username, password } = req.body;
+    db.query(`SELECT * FROM users WHERE username = '${username}'`).then((user) => {
+      if (user.rows.length > 0) {
+        const checkedPassword = bcrypt.compareSync(password, user.rows[0].password);
+        if (checkedPassword) {
+          const payload = { fullname: user.rows[0].fullname, username: user.rows[0].username, userid: user.rows[0].id };
+          const token = jwt.sign(payload, process.env.SECRET_KEY, {
+            expiresIn: 60 * 60 * 10 // 10 hours
+          });
+          req.token = token;
+          return res.status(200)
+            .json({
+              status: 'Success',
+              message: 'successfull login',
+              data: {
+                username: user.rows[0].username,
+                email: user.rows[0].email
+              },
+              usertoken: token
+            });
+        }
+      }
+      return res.status(500)
+        .json({
+          status: 'Failed',
+          message: 'invalid username or password'
+        });
+    }).catch((err) => {
+      res.status(500)
+        .json({
+          status: 'Failed',
+          message: err.message
+        });
+    });
   }
 }
