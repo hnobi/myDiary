@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node -- server/app.js",
     "start:dev": " nodemon --watch server --exec babel-node -- server/app.js",
-    "test": "nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "test": " npm run table && nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "table": "babel-node -- server/models/tableSchema.js"
   },

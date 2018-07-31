@@ -8,7 +8,8 @@ const router = express.Router();
 // User signup and signin
 router.route('/auth/signup')
   .post(UserValidation.signUp, UsersControllers.signUp);
-
+router.route('/auth/signin')
+  .post(UsersControllers.signIn);
 // entry
 router.route('/entries')
   .post(EntryValidations.addEntryVaLidation, EntryControllers.addEntry)
