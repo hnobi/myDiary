@@ -1,4 +1,5 @@
 import validator from 'validator';
+
 /**
  *Validates POST and PUt requests for entries route
  * @class EntryValidation
@@ -35,9 +36,9 @@ export default class EntryValidation {
       }
     } else { errors.entry = 'Diary entry is required'; }
 
-    if (validator.isEmpty(date)) {
-      errors.date = 'date is required';
-    }
+    // if (validator.isEmpty(date)) {
+    //   errors.date = 'date is required';
+    // }
 
     // checks if the errors object is empty
     if (Object.keys(errors).length !== 0) {

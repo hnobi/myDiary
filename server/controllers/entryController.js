@@ -1,4 +1,6 @@
 import entryData from '../models/entries';
+import db from '../models/db';
+
 /**
 * @export
 *  @class EntryController
@@ -11,28 +13,43 @@ export default class EntryController {
   * @returns {obj} insertion error messages or success messages
    */
   static addEntry(req, res) {
-    entryData.forEach((element) => {
-      if (element.title === req.body.title) {
-        return res.json({ message: 'title of entry already exist ' });
-      }
-    });
-    const NewId = entryData[entryData.length - 1].id + 1;
-    const {
-      title,
-      date,
-      entry
-    } = req.body;
-    entryData.push({
-      id: NewId,
-      title,
-      date,
-      entry
-    });
-    return res.status(201)
-      .json({
-        status: 'Success',
-        message: 'Successfully added new entry',
-        entryData
+    const { title, entry } = req.body;
+    const date = req.body.date || new Date();
+    const {userid} = req.decoded;
+    db.query(`SELECT * FROM entries where title = '${title}' `)
+      .then((entryFound) => {
+        if (entryFound.rows.length > 0) {
+          return res.status(409)
+            .json({
+              message: 'title of entry already exist '
+            })
+        }
+        const sql = 'INSERT INTO entries(title, date, entry,userid) VALUES ($1, $2, $3, $4)';
+        const params = [title, date, entry, userid];
+        db.query(sql, params)
+          .then((entryData) => {
+            return res.status(201)
+              .json({
+                status: 'Success',
+                message: 'Successfully added new entry',
+               data:{
+                userid,
+                title, 
+                date, 
+                entry
+               }
+              });
+          }).catch((err) => {
+            return res.status(500).json({
+              status: 'Failed',
+              message: err.message
+            });
+          });
+      }).catch((err) => {
+        return res.status(500).json({
+          status: 'Failed',
+          message: err.message
+        });
       });
   }
 

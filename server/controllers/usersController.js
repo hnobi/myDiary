@@ -36,7 +36,6 @@ export default class UsersController {
                 status: 'Success',
                 message: 'Successfully created myDiary account',
                 data: {
-                  id: user.rows[0].id,
                   username: req.body.username,
                   email: req.body.email,
                   password: hashedPassword
@@ -76,6 +75,7 @@ export default class UsersController {
               status: 'Success',
               message: 'successfull login',
               data: {
+                id: user.rows[0].id,
                 username: user.rows[0].username,
                 email: user.rows[0].email
               },

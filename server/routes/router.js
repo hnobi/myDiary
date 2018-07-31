@@ -3,16 +3,19 @@ import EntryControllers from '../controllers/entryController';
 import EntryValidations from '../middlewares/entryValidation';
 import UsersControllers from '../controllers/usersController';
 import UserValidation from '../middlewares/userValidation';
+import authToken from '../middlewares/authToken'
 
 const router = express.Router();
+
 // User signup and signin
 router.route('/auth/signup')
   .post(UserValidation.signUp, UsersControllers.signUp);
 router.route('/auth/signin')
   .post(UsersControllers.signIn);
+
 // entry
 router.route('/entries')
-  .post(EntryValidations.addEntryVaLidation, EntryControllers.addEntry)
+  .post(authToken, EntryValidations.addEntryVaLidation, EntryControllers.addEntry)
   .get(EntryControllers.getAllEntry);
 
 router.route('/entries/:entryId')

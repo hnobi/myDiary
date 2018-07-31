@@ -44,7 +44,8 @@ const createTable = () => {
     userId int REFERENCES users(id) ON DELETE CASCADE,
   
     date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP 
-  
+
+
      )`;
 
   client.query(
