@@ -6,8 +6,9 @@
   "scripts": {
     "start": "babel-node -- server/app.js",
     "start:dev": " nodemon --watch server --exec babel-node -- server/app.js",
-    "test": "nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "test": " npm run table && nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "table": "babel-node -- server/models/tableSchema.js"
   },
   "repository": {
     "type": "git",
@@ -21,10 +22,15 @@
   "homepage": "https://github.com/hnobi/myDiary#readme",
   "dependencies": {
     "babel-register": "^6.26.0",
+    "bcrypt": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
     "mocha": "^5.2.0",
+    "pg": "^7.4.3",
     "supertest": "^3.1.0",
     "validator": "^10.4.0"
   },
