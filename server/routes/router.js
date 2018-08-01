@@ -16,7 +16,7 @@ router.route('/auth/signin')
 // entry
 router.route('/entries')
   .post(authToken, EntryValidations.addEntryVaLidation, EntryControllers.addEntry)
-  .get(EntryControllers.getAllEntry);
+  .get(authToken, EntryControllers.getAllEntry);
 
 router.route('/entries/:entryId')
   .put(authToken, EntryValidations.modifyEntryVaLidation, EntryControllers.modifyEntry)
