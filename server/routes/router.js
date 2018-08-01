@@ -19,7 +19,7 @@ router.route('/entries')
 // .get(authToken, EntryControllers.getAllEntry);
 
 router.route('/entries/:entryId')
-// .put(authToken, EntryValidations.modifyEntryVaLidation, EntryControllers.modifyEntry)
-// .get(authToken, EntryControllers.getEntry)
-// .delete(EntryControllers.deleteEntry);
+  .put(authToken, EntryValidations.modifyEntryVaLidation, EntryControllers.modifyEntry)
+  .get(authToken, EntryControllers.getEntry)
+  .delete(EntryControllers.deleteEntry);
 export default router;
