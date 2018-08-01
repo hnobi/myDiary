@@ -50,13 +50,12 @@ const createTable = () => {
 
      )`;
 
-  client.query(
-    query, (err) => {
-      if (err) {
-        return err.message;
-      }
-      client.end();
+  client.query(query, (err) => {
+    if (err) {
+      return err.message;
     }
+    client.end();
+  }
   );
 };
 createTable();

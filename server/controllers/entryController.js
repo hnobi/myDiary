@@ -161,24 +161,30 @@ class EntryController {
      * @memberof EntryController
      */
   deleteEntry(req, res) {
-    for (let i = 0; i < entryData.length; i += 1) {
-      if (entryData[i].id === parseInt(req.params.entryId, 10)) {
-        entryData.splice(i, 1);
-        return res.status(200)
+    const { entryId } = req.params;
+    const sql = 'DELETE FROM entries WHERE  id = $2',
+      param = [req.decoded.userid, entryId];
+    db.query(sql, param).then((results) => {
+      if (results.rowCount === 0) {
+        return res.status(404)
           .json({
-            status: 'Success',
-            message: 'Successfully deleted entry',
-            entryData
+            status: 'Failed',
+            message: 'entry id does not exist',
+
           });
       }
-    }
-    return res.status(400)
-      .json({
-        status: 'failed',
-        message: 'events id does not exist',
+      return res.status(200)
+        .json({
+          status: 'Success',
+          message: 'Successfully deleted entry',
+          data: results.rows
+        })
+    }).catch((err) => {
+      res.status(500).json({
+        status: 'Failed',
+        message: err.message
       });
+    });
   }
 }
-
-const EntryControllers = new EntryController();
-export default EntryControllers;
+export default new EntryController();

@@ -90,5 +90,4 @@ class UserValidation {
     next();
   }
 }
-const UserValidations = new UserValidation();
-export default UserValidations;
+export default new UserValidation();
