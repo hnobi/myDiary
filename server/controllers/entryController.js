@@ -124,10 +124,10 @@ class EntryController {
   getEntry(req, res) {
     const { entryId } = req.params;
 
-    const sql = 'SELECT * FROM entries WHERE userid = $1 AND id = $2',
+    const sql = 'SELECT id FROM entries WHERE userid = $1 AND id = $2',
       param = [req.decoded.userid, entryId];
     db.query(sql, param).then((result) => {
-      if (result.rows.length < 0) {
+      if (result.rowCount === 0) {
         return res.status(404)
           .json({
             status: 'Failed',
