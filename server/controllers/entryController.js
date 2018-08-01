@@ -27,22 +27,20 @@ export default class EntryController {
         const sql = 'INSERT INTO entries(title, date, entry,userid) VALUES ($1, $2, $3, $4)';
         const params = [title, date, entry, userid];
         db.query(sql, params)
-          .then(() => {
-            return res.status(201)
-              .json({
-                status: 'Success',
-                message: 'Successfully added new entry',
-                data: {
-                  userid,
-                  title,
-                  date,
-                  entry
-                }
-              })
-          }).catch(err => res.status(500).json({
-            status: 'Failed',
-            message: err.message
-          }));
+          .then(() => res.status(201)
+            .json({
+              status: 'Success',
+              message: 'Successfully added new entry',
+              data: {
+                userid,
+                title,
+                date,
+                entry
+              }
+            })).catch(err => res.status(500).json({
+              status: 'Failed',
+              message: err.message
+            }));
       }).catch(err => res.status(500).json({
         status: 'Failed',
         message: err.message
@@ -60,7 +58,7 @@ export default class EntryController {
     const {
       title, entry
     } = req.body,
-      date = req.body.date || new Date,
+      date = req.body.date || new Date(),
       { entryId } = req.params;
     const sql = 'UPDATE entries SET title= $1,date= $2, entry =$3 WHERE id = $4';
     const params = [title, date, entry, entryId];
@@ -83,7 +81,7 @@ export default class EntryController {
             entry: result
           }
         });
-    }).catch((err) => res.status(500).json({
+    }).catch(err => res.status(500).json({
       status: 'Failed',
       message: err.message
     }));
@@ -97,15 +95,24 @@ export default class EntryController {
       * @memberof EntryController
       */
   static getAllEntry(req, res) {
-    if (entryData.length !== 0) {
-      return res.status(200).json({
-        status: 'Success',
-        message: `Successsfully retrieved all diary entries with total of ${entryData.length} entries`,
-        entryData
-      });
-    }
-    return res.status(200).json({
-      message: 'No entry in your diary'
+    const sql = 'SELECT * FROM entries WHERE userid = $1', param = [req.decoded.userid];
+    db.query(sql, param).then((entries) => {
+      if (entries.rows.length < 1) {
+        return res.status(200).json({
+          message: 'No entry in your diary'
+        });
+      }
+      return res.status(200)
+        .json({
+          status: 'Success',
+          message: `Successsfully retrieved all diary entries with total of ${entries.rows.length} entries`,
+          entries: entries.rows
+        });
+    }).catch((err) => {
+      res.status(500).json({
+        status: 'Failed',
+        message: err.message
+      })
     });
   }
 

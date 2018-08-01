@@ -30,7 +30,7 @@ export default class UsersController {
         const sql = 'INSERT INTO users(fullname , username, email, password) VALUES ($1, $2,$3,$4)';
         const params = [fullname, username, email, hashedPassword];
         db.query(sql, params)
-          .then((user) => {
+          .then(() => {
             return res.status(201)
               .json({
                 status: 'Success',
