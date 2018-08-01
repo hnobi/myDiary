@@ -4,7 +4,7 @@ import validator from 'validator';
  *Validates POST and PUt requests for entries route
  * @class EntryValidation
  */
-export default class EntryValidation {
+class EntryValidation {
   /**
             * Validates addEntry before allowing access to controller class
             * @param {obj} req
@@ -13,7 +13,7 @@ export default class EntryValidation {
             * @memberof EntryValidation
             * @returns {obj} validation error messages object or contents of request.body object
            */
-  static addEntryVaLidation(req, res, next) {
+  addEntryVaLidation(req, res, next) {
     const { title, date, entry } = req.body,
       errors = {};
     if (title === undefined || date === undefined || entry === undefined) {
@@ -51,7 +51,9 @@ export default class EntryValidation {
              * @memberof EntryValidation
              * @returns {obj} validation error messages object or contents of request.body object
              */
-  static modifyEntryVaLidation(req, res, next) {
+  modifyEntryVaLidation(req, res, next) {
+    const { title, entry, date } = req.body;
+
     if (title === undefined || date === undefined || entry === undefined) {
       return res.status(400)
         .json({
@@ -59,8 +61,7 @@ export default class EntryValidation {
         });
     }
 
-    const { title, entry } = req.body,
-      errors = {};
+    const errors = {};
     if (title) {
       for (let character = 0; character < title.length; character += 1) {
         if (validator.toInt(title[character])) {
@@ -81,3 +82,6 @@ export default class EntryValidation {
     next();
   }
 }
+
+const EntryValidations = new EntryValidation();
+export default EntryValidations;

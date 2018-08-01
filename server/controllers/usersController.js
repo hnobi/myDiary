@@ -7,20 +7,21 @@ import db from '../models/db';
  * @export
  * @class UsersController
  */
-export default class UsersController {
+class UsersController {
   /**
    * @param {obj} req
    * @param {obj} res
    * @memberof UsersController
    *  @returns {obj} insertion error messages or success message
    */
-  static signUp(req, res) {
+  signUp(req, res) {
     const { fullname, username, email } = req.body;
     const hashedPassword = bcrypt.hashSync(req.body.password.trim(), 10);
     db.query(`SELECT id FROM users WHERE email = '${email}' OR username = '${username}'`)
       .then((userfound) => {
         if (userfound.rows.length > 0) {
-          // read on github.com/docker/docker-registry/issues/10 => that this is better to be 409(conflict) since it not an error
+          // read on github.com/docker/docker-registry/issues/10 =>
+          // that this is better to be 409(conflict) since it not an error
           return res.status(409)
             .json({
               status: 'Failed',
@@ -30,23 +31,19 @@ export default class UsersController {
         const sql = 'INSERT INTO users(fullname , username, email, password) VALUES ($1, $2,$3,$4)';
         const params = [fullname, username, email, hashedPassword];
         db.query(sql, params)
-          .then(() => {
-            return res.status(201)
-              .json({
-                status: 'Success',
-                message: 'Successfully created myDiary account',
-                data: {
-                  username: req.body.username,
-                  email: req.body.email,
-                  password: hashedPassword
-                }
-              });
-          }).catch((err) => {
-            return res.status(500).json({
+          .then(() => res.status(201)
+            .json({
+              status: 'Success',
+              message: 'Successfully created myDiary account',
+              data: {
+                username: req.body.username,
+                email: req.body.email,
+                password: hashedPassword
+              }
+            })).catch(err => res.status(500).json({
               status: 'Failed',
               message: err.message
-            });
-          });
+            }));
       }).catch(err => res.status(500).json({
         status: 'Failed',
         message: err.message
@@ -59,7 +56,7 @@ export default class UsersController {
    * @memberof UsersController
    *  @returns {obj} insertion error messages or success message
    */
-  static signIn(req, res) {
+  signIn(req, res) {
     const { username, password } = req.body;
     db.query(`SELECT * FROM users WHERE username = '${username}'`).then((user) => {
       if (user.rows.length > 0) {
@@ -97,3 +94,5 @@ export default class UsersController {
     });
   }
 }
+const UsersControllers = new UsersController();
+export default UsersControllers;

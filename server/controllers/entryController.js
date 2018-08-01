@@ -5,14 +5,14 @@ import db from '../models/db';
 * @export
 *  @class EntryController
 */
-export default class EntryController {
+class EntryController {
   /**
    * @param {obj} req
    * @param {obj} res
+   * @returns {obj} insertion error messages or success messages
    * @memberof EntryController
-  * @returns {obj} insertion error messages or success messages
    */
-  static addEntry(req, res) {
+  addEntry(req, res) {
     const { title, entry } = req.body;
     const date = req.body.date || new Date();
     const { userid } = req.decoded;
@@ -48,13 +48,13 @@ export default class EntryController {
   }
 
   /**
-      * Modify a particular entry from the entry model
-      * @param {obj} req
-      * @param {obj} res
-      * @returns {obj} insertion error messages or success messages
-      *  @memberof EntryController
-      */
-  static modifyEntry(req, res) {
+    * Modify a particular entry from the entry model
+    * @param {obj} req
+    * @param {obj} res
+    * @returns {obj} insertion error messages or success messages
+    *  @memberof EntryController
+    */
+  modifyEntry(req, res) {
     const {
       title, entry
     } = req.body,
@@ -75,9 +75,7 @@ export default class EntryController {
           status: 'Success',
           message: 'Successfully updated  your entry',
           data: {
-            id: result.rows[0],
-            title: result.rows,
-            // date: result.rows[0].date,
+            id: entryId,
             entry: result
           }
         });
@@ -94,8 +92,9 @@ export default class EntryController {
       * @returns {obj} insertion error messages or success messages
       * @memberof EntryController
       */
-  static getAllEntry(req, res) {
-    const sql = 'SELECT * FROM entries WHERE userid = $1', param = [req.decoded.userid];
+  getAllEntry(req, res) {
+    const sql = 'SELECT * FROM entries WHERE userid = $1',
+      param = [req.decoded.userid];
     db.query(sql, param).then((entries) => {
       if (entries.rows.length < 1) {
         return res.status(200).json({
@@ -112,7 +111,7 @@ export default class EntryController {
       res.status(500).json({
         status: 'Failed',
         message: err.message
-      })
+      });
     });
   }
 
@@ -122,23 +121,36 @@ export default class EntryController {
       * @param {obj} res
       * @returns {obj} insertion error messages or success messages
       */
-  static getEntry(req, res) {
-    for (let i = 0; i < entryData.length; i += 1) {
-      if (entryData[i].id === parseInt(req.params.entryId, 10)) {
-        return res.status(200)
+  getEntry(req, res) {
+    const { entryId } = req.params;
+
+    const sql = 'SELECT * FROM entries WHERE userid = $1 AND id = $2',
+      param = [req.decoded.userid, entryId];
+    db.query(sql, param).then((result) => {
+      if (result.rows.length < 0) {
+        return res.status(404)
           .json({
-            status: 'Success',
-            message: 'Successfully retrieve an entry',
-            Entry: entryData[i]
+            status: 'Failed',
+            message: 'Entry not found'
           });
       }
-    }
+      return res.status(200)
+        .json({
+          data: {
+            status: 'Success',
+            message: 'Successfully retrieve an entry',
+            entry: result
+          }
+        });
 
-    return res.status(404)
-      .json({
+
+      //
+    }).catch((err) => {
+      res.status(500).json({
         status: 'Failed',
-        message: 'Page not found'
+        message: err.message
       });
+    });
   }
 
   /**
@@ -148,7 +160,7 @@ export default class EntryController {
      * @returns {obj} insertion error messages or success messages
      * @memberof EntryController
      */
-  static deleteEntry(req, res) {
+  deleteEntry(req, res) {
     for (let i = 0; i < entryData.length; i += 1) {
       if (entryData[i].id === parseInt(req.params.entryId, 10)) {
         entryData.splice(i, 1);
@@ -167,3 +179,6 @@ export default class EntryController {
       });
   }
 }
+
+const EntryControllers = new EntryController();
+export default EntryControllers;
