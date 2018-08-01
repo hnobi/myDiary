@@ -4,7 +4,7 @@ import validator from 'validator';
  * Validates Signup and Signin POST requests
  * @class UserValidation
  */
-export default class UserValidation {
+class UserValidation {
   /**
   * Validates signup
   * @param {obj} req
@@ -13,12 +13,13 @@ export default class UserValidation {
   * @memberof UserValidation
   * @returns {obj} validation error messages object or contents of request.body object
  */
-  static signUp(req, res, next) {
+  signUp(req, res, next) {
     const {
       fullname, username, email, password
     } = req.body;
     const errors = {};
-    if (fullname === undefined || username === undefined || email === undefined || password === undefined) {
+    if (fullname === undefined || username === undefined
+      || email === undefined || password === undefined) {
       return res.status(400)
         .json({
           message: 'All or some of the field is/are undefined'
@@ -63,7 +64,7 @@ export default class UserValidation {
   * @memberof UserValidation
   * @returns {obj} validation error messages object or contents of request.body object
  */
-  static signIn(req, res, next) {
+  signIn(req, res, next) {
     const { username, password } = req.body;
     const errors = {};
     if (username === undefined || password === undefined) {
@@ -89,3 +90,5 @@ export default class UserValidation {
     next();
   }
 }
+const UserValidations = new UserValidation();
+export default UserValidations;

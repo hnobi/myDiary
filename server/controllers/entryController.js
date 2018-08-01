@@ -6,9 +6,12 @@ import db from '../models/db';
 *  @class EntryController
 */
 class EntryController {
-  constructor() {
-
-  }
+  /**
+   * @param {obj} req
+   * @param {obj} res
+   * @returns {obj} insertion error messages or success messages
+   * @memberof EntryController
+   */
   addEntry(req, res) {
     const { title, entry } = req.body;
     const date = req.body.date || new Date();
@@ -45,13 +48,13 @@ class EntryController {
   }
 
   /**
-      * Modify a particular entry from the entry model
-      * @param {obj} req
-      * @param {obj} res
-      * @returns {obj} insertion error messages or success messages
-      *  @memberof EntryController
-      */
-  static modifyEntry(req, res) {
+    * Modify a particular entry from the entry model
+    * @param {obj} req
+    * @param {obj} res
+    * @returns {obj} insertion error messages or success messages
+    *  @memberof EntryController
+    */
+  modifyEntry(req, res) {
     const {
       title, entry
     } = req.body,
@@ -89,7 +92,7 @@ class EntryController {
       * @returns {obj} insertion error messages or success messages
       * @memberof EntryController
       */
-  static getAllEntry(req, res) {
+  getAllEntry(req, res) {
     const sql = 'SELECT * FROM entries WHERE userid = $1',
       param = [req.decoded.userid];
     db.query(sql, param).then((entries) => {
@@ -108,7 +111,7 @@ class EntryController {
       res.status(500).json({
         status: 'Failed',
         message: err.message
-      })
+      });
     });
   }
 
@@ -118,7 +121,7 @@ class EntryController {
       * @param {obj} res
       * @returns {obj} insertion error messages or success messages
       */
-  static getEntry(req, res) {
+  getEntry(req, res) {
     const { entryId } = req.params;
 
     const sql = 'SELECT * FROM entries WHERE userid = $1 AND id = $2',
@@ -143,7 +146,10 @@ class EntryController {
 
       //
     }).catch((err) => {
-      message: err.message
+      res.status(500).json({
+        status: 'Failed',
+        message: err.message
+      });
     });
   }
 
@@ -154,7 +160,7 @@ class EntryController {
      * @returns {obj} insertion error messages or success messages
      * @memberof EntryController
      */
-  static deleteEntry(req, res) {
+  deleteEntry(req, res) {
     for (let i = 0; i < entryData.length; i += 1) {
       if (entryData[i].id === parseInt(req.params.entryId, 10)) {
         entryData.splice(i, 1);
@@ -174,7 +180,5 @@ class EntryController {
   }
 }
 
-let EntryControllers = new EntryController();
+const EntryControllers = new EntryController();
 export default EntryControllers;
-
-
