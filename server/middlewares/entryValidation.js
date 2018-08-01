@@ -36,9 +36,6 @@ export default class EntryValidation {
       }
     } else { errors.entry = 'Diary entry is required'; }
 
-    // if (validator.isEmpty(date)) {
-    //   errors.date = 'date is required';
-    // }
 
     // checks if the errors object is empty
     if (Object.keys(errors).length !== 0) {
@@ -55,6 +52,13 @@ export default class EntryValidation {
              * @returns {obj} validation error messages object or contents of request.body object
              */
   static modifyEntryVaLidation(req, res, next) {
+    if (title === undefined || date === undefined || entry === undefined) {
+      return res.status(400)
+        .json({
+          message: 'All or some of the field is/are undefined'
+        });
+    }
+
     const { title, entry } = req.body,
       errors = {};
     if (title) {

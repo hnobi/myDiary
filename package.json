@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node -- server/app.js",
-    "start:dev": " nodemon --watch server --exec babel-node -- server/app.js",
+    "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
     "test": " npm run table && nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "table": "babel-node -- server/models/tableSchema.js"
@@ -41,7 +41,7 @@
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
-    "nodemon": "^1.18.2",
+    "nodemon": "^1.18.3",
     "nyc": "^12.0.2"
   }
 }

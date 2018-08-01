@@ -15,42 +15,38 @@ export default class EntryController {
   static addEntry(req, res) {
     const { title, entry } = req.body;
     const date = req.body.date || new Date();
-    const {userid} = req.decoded;
+    const { userid } = req.decoded;
     db.query(`SELECT * FROM entries where title = '${title}' `)
       .then((entryFound) => {
         if (entryFound.rows.length > 0) {
           return res.status(409)
             .json({
               message: 'title of entry already exist '
-            })
+            });
         }
         const sql = 'INSERT INTO entries(title, date, entry,userid) VALUES ($1, $2, $3, $4)';
         const params = [title, date, entry, userid];
         db.query(sql, params)
-          .then((entryData) => {
+          .then(() => {
             return res.status(201)
               .json({
                 status: 'Success',
                 message: 'Successfully added new entry',
-               data:{
-                userid,
-                title, 
-                date, 
-                entry
-               }
-              });
-          }).catch((err) => {
-            return res.status(500).json({
-              status: 'Failed',
-              message: err.message
-            });
-          });
-      }).catch((err) => {
-        return res.status(500).json({
-          status: 'Failed',
-          message: err.message
-        });
-      });
+                data: {
+                  userid,
+                  title,
+                  date,
+                  entry
+                }
+              })
+          }).catch(err => res.status(500).json({
+            status: 'Failed',
+            message: err.message
+          }));
+      }).catch(err => res.status(500).json({
+        status: 'Failed',
+        message: err.message
+      }));
   }
 
   /**
@@ -62,26 +58,35 @@ export default class EntryController {
       */
   static modifyEntry(req, res) {
     const {
-      title, date, entry
-    } = req.body;
-    for (let i = 0; i < entryData.length; i += 1) {
-      if (entryData[i].id === parseInt(req.params.entryId, 10)) {
-        entryData[i].title = (title) || entryData[i].title;
-        entryData[i].date = (date) || entryData[i].date;
-        entryData[i].entry = (entry) || entryData[i].entry;
-        return res.status(200)
+      title, entry
+    } = req.body,
+      date = req.body.date || new Date,
+      { entryId } = req.params;
+    const sql = 'UPDATE entries SET title= $1,date= $2, entry =$3 WHERE id = $4';
+    const params = [title, date, entry, entryId];
+    db.query(sql, params).then((result) => {
+      if (result.rowCount === 0) {
+        return res.status(404)
           .json({
-            status: 'Success',
-            message: 'Successfully updated  your entry',
-            entryData,
+            status: 'Failed',
+            message: 'entry id does not exist',
           });
       }
-    }
-    res.status(404);
-    res.json({
+      return res.status(200)
+        .json({
+          status: 'Success',
+          message: 'Successfully updated  your entry',
+          data: {
+            id: result.rows[0],
+            title: result.rows,
+            // date: result.rows[0].date,
+            entry: result
+          }
+        });
+    }).catch((err) => res.status(500).json({
       status: 'Failed',
-      message: 'entry id does not exist',
-    });
+      message: err.message
+    }));
   }
 
   /**
