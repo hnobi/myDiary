@@ -2,11 +2,21 @@ import chai from 'chai';
 import supertest from 'supertest';
 import app from '../app';
 import entryData from '../models/entries';
+import db from '../models/db';
 
 const { expect } = chai;
 const request = supertest(app);
+let token;
+// const wrongToken = 'wromgtoken';
 
 describe('All test cases for MyDiary application', () => {
+  after((done) => {
+    db.query('  DROP TABLE IF EXISTS users CASCADE').then(() => {
+      db.query('  DROP TABLE IF EXISTS entries CASCADE').then(() => {
+      }).catch(() => { return err.message; });
+      done();
+    });
+  })
   describe('test case for loading application home page', () => {
     it('Should load application home page', (done) => {
       request.get('/')
@@ -65,13 +75,13 @@ describe('All test cases for MyDiary application', () => {
 
   describe('All test cases for Users', () => {
     describe('All test cases for user signUp ', () => {
-      const userInfo = {
-        fullname: 'Hammed Noibi',
-        username: 'hnobi',
-        email: 'hnobi09@yahoo.com',
-        password: '12345678'
-      };
       it('should create a new user account and return a `201`', (done) => {
+        const userInfo = {
+          fullname: 'Hammed Noibi',
+          username: 'hnobi',
+          email: 'hnobi08@yahoo.com',
+          password: '12345678'
+        };
         request.post('/api/v1/auth/signup')
           .send(userInfo)
           .expect(201)
@@ -79,15 +89,21 @@ describe('All test cases for MyDiary application', () => {
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Successfully created myDiary account');
             expect(res.body.data.username).to.equal('hnobi');
-            expect(res.body.data.email).to.equal('hnobi09@yahoo.com');
+            expect(res.body.data.email).to.equal('hnobi@yahoo.com');
             if (err) done(err);
             done();
           });
       });
       it('should  check if user already in the database and return a `409`', (done) => {
+        const userInfo = {
+          fullname: 'Hammed Noibi',
+          username: 'hnobi',
+          email: 'hnobi08@yahoo.com',
+          password: '12345678'
+        };
         request.post('/api/v1/auth/signup')
           .send(userInfo)
-          .expect(201)
+          .expect(409)
           .end((err, res) => {
             expect(res.body.status).to.equal('Failed');
             expect(res.body.message).to.equal('User already exist');
@@ -141,27 +157,11 @@ describe('All test cases for MyDiary application', () => {
       });
     });
     describe('All test cases for user signIn ', () => {
-      const userInfo = {
-        username: 'hnobi',
-        password: '12345678'
-      };
-      it('should Login  a new user and return a `201`', (done) => {
-        request.post('/api/v1/auth/signin')
-          .send(userInfo)
-          .expect(201)
-          .end((err, res) => {
-            expect(res.body.status).to.equal('Success');
-            expect(res.body.message).to.equal('successfull login');
-            expect(res.body.data.username).to.equal('hnobi');
-            expect(res.body.data.email).to.equal('hnobi09@yahoo.com');
-            done();
-          });
-      });
       it('should not Login  a new user and return a `500`', (done) => {
         request.post('/api/v1/auth/signin')
           .send({
             username: 'wronguser',
-            password: '12345678'
+            password: '1234673679'
           })
           .expect(201)
           .end((err, res) => {
@@ -207,13 +207,28 @@ describe('All test cases for MyDiary application', () => {
             done();
           });
       });
+      it('should Login  a new user and return a `201`', (done) => {
+        const userInfo = {
+          username: 'hnobi',
+          password: '1234673679'
+        };
+        request.post('/api/v1/auth/signin')
+          .send(userInfo)
+          .expect(201)
+          .end((err, res) => {
+            token = res.body.token;
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('successfull login');
+            done();
+          });
+      });
     });
   });
   describe('All test cases for adding entry to the application', () => {
     describe('All  test cases of wrong input for adding entry ', () => {
       it('should return a `400` status code with res.body error message', (done) => {
         request.post('/api/v1/entries')
-          .set('Content-Type', 'application/json')
+          .set('x-access-token', token)
           .send({
             title: '3rd holiday',
             date: '23-11-2017',
@@ -223,13 +238,12 @@ describe('All test cases for MyDiary application', () => {
           .end((err, res) => {
             expect(res.body.errors.title).to.equal('Entry title must not contain numbers');
             expect(res.body.errors.entry).to.equal('Diary entry provided must be between 10 to 2000 characters');
-            if (err) done(err);
             done();
           });
       });
       it('should return a `400` status code with res.body error message', (done) => {
         request.post('/api/v1/entries')
-          .set('Content-Type', 'application/json')
+          .set('x-access-token', token)
           .send({
             title: '',
             date: '',
@@ -246,7 +260,7 @@ describe('All test cases for MyDiary application', () => {
       });
       it('should return a `400` status code with res.body error message', (done) => {
         request.post('/api/v1/entries')
-          .set('Content-Type', 'application/json')
+          .set('x-access-token', token)
           .send({})
           .expect(400)
           .end((err, res) => {
@@ -261,7 +275,7 @@ describe('All test cases for MyDiary application', () => {
     describe('Test case of correct input for adding entry ', () => {
       it('should return a `201` status code with res.body success message', (done) => {
         request.post('/api/v1/entries')
-          .set('Content-Type', 'application/json')
+          .set('x-access-token', token)
           .send({
             date: '13-22-2017',
             entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory',
@@ -272,7 +286,6 @@ describe('All test cases for MyDiary application', () => {
             expect(res.body).deep.equal({
               status: 'Success',
               message: 'Successfully added new entry',
-              entryData
             });
 
             if (err) done(err);
@@ -285,7 +298,7 @@ describe('All test cases for MyDiary application', () => {
     describe('All  test cases of wrong input for updting entries ', () => {
       it('should return a `400` status code with res.body error message', (done) => {
         request.put('/api/v1/entries/3')
-          .set('Content-Type', 'application/json')
+          .set('x-access-token', token)
           .send({
             title: '3rd holiday',
             entry: 'very fun'
@@ -301,7 +314,7 @@ describe('All test cases for MyDiary application', () => {
       });
       it('should return a `400` status code with res.body error message', (done) => {
         request.put('/api/v1/entries/9')
-          .set('Content-Type', 'application/json')
+          .set('x-access-token', token)
           .send({
             title: 'june holiday',
             date: '09-12-2108',
@@ -321,7 +334,7 @@ describe('All test cases for MyDiary application', () => {
     describe('All  test cases of correct input for updating entries ', () => {
       it('should return a `200` status code with res.body success message', (done) => {
         request.put('/api/v1/entries/3')
-          .set('Content-Type', 'application/json')
+          .set('x-access-token', token)
           .send({
             title: 'june holiday',
             date: '09-12-2108',
@@ -332,7 +345,6 @@ describe('All test cases for MyDiary application', () => {
             expect(res.body).deep.equal({
               status: 'Success',
               message: 'Successfully updated  your entry',
-              entryData
             });
             if (err) done(err);
             done();
@@ -343,7 +355,7 @@ describe('All test cases for MyDiary application', () => {
   describe('test case for retriving all entry in the diary', () => {
     it('should return `200` status code with `res.body` success messages', (done) => {
       request.get('/api/v1/entries')
-        .set('Content-Type', 'application/json')
+        .set('x-access-token', token)
         .expect(200)
         .end((err, res) => {
           expect(res.body).deep.equal({
@@ -359,7 +371,7 @@ describe('All test cases for MyDiary application', () => {
   describe('test case for retriving an entry in the diary', () => {
     it('should return `200` status code with `res.body` success messages', (done) => {
       request.get('/api/v1/entries/2')
-        .set('Content-Type', 'application/json')
+        .set('x-access-token', token)
         .expect(200)
         .end((err, res) => {
           expect(res.body).deep.equal({
@@ -373,7 +385,7 @@ describe('All test cases for MyDiary application', () => {
     });
     it('should return `200` status code with `res.body` error messages', (done) => {
       request.get('/api/v1/entries/9')
-        .set('Content-Type', 'application/json')
+        .set('x-access-token', token)
         .expect(404)
         .end((err, res) => {
           expect(res.body).deep.equal({
@@ -388,27 +400,22 @@ describe('All test cases for MyDiary application', () => {
   describe('test case for deleting an entry in the diary', () => {
     it('should return `200` status code with `res.body` success messages', (done) => {
       request.delete('/api/v1/entries/2')
-        .set('Content-Type', 'application/json')
+        .set('x-access-token', token)
         .expect(200)
         .end((err, res) => {
-          expect(res.body).deep.equal({
-            status: 'Success',
-            message: 'Successfully deleted entry',
-            entryData
-          });
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Successfully deleted entry');
           if (err) done(err);
           done();
         });
     });
     it('should return `400` status code with `res.body` error messages', (done) => {
       request.delete('/api/v1/entries/9')
-        .set('Content-Type', 'application/json')
+        .set('x-access-token', token)
         .expect(400)
         .end((err, res) => {
-          expect(res.body).deep.equal({
-            status: 'failed',
-            message: 'events id does not exist',
-          });
+          expect(res.body.status).to.equal('failed');
+          expect(res.body.message).to.equal('events id does not exist');
           if (err) done(err);
           done();
         });
