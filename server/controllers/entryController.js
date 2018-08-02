@@ -111,10 +111,9 @@ class EntryController {
       res.status(500).json({
         status: 'Failed',
         message: err.message
-      });
+      })
     });
   }
-
   /**
       * Get a particular entry from the entry model
       * @param {obj} req
@@ -162,7 +161,7 @@ class EntryController {
      */
   deleteEntry(req, res) {
     const { entryId } = req.params;
-    const sql = 'DELETE FROM entries WHERE  id = $2',
+    const sql = 'DELETE FROM entries WHERE userid = $1 AND id = $2',
       param = [req.decoded.userid, entryId];
     db.query(sql, param).then((results) => {
       if (results.rowCount === 0) {
@@ -188,3 +187,4 @@ class EntryController {
   }
 }
 export default new EntryController();
+
