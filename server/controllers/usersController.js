@@ -16,12 +16,10 @@ class UsersController {
    */
   signUp(req, res) {
     const { fullname, username, email } = req.body;
-    const hashedPassword = bcrypt.hashSync(req.body.password.trim(), 10);
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     db.query(`SELECT id FROM users WHERE email = '${email}' OR username = '${username}'`)
       .then((userfound) => {
         if (userfound.rows.length > 0) {
-          // read on github.com/docker/docker-registry/issues/10 =>
-          // that this is better to be 409(conflict) since it not an error
           return res.status(409)
             .json({
               status: 'Failed',
@@ -80,7 +78,7 @@ class UsersController {
                 username: user.rows[0].username,
                 email: user.rows[0].email
               },
-              usertoken: token
+              token
             });
         }
       }

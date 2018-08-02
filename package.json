@@ -6,9 +6,13 @@
   "scripts": {
     "start": "babel-node -- server/app.js",
     "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
-    "test": " npm run table && nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "test": "cross-env NODE_ENV=test && nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "dev": "cross-env NODE_ENV=development &&  npm run table",
+    "heroku-postbuild": "npm run migrate",
+    "build": "cross-env NODE_ENV=production &&  npm run table",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "table": "babel-node -- server/models/tableSchema.js"
+    "migrate": "babel-node -- server/models/tableSchema.js",
+    "migrate-test": "cross-env NODE_ENV=test npm run"
   },
   "repository": {
     "type": "git",
@@ -37,6 +41,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
