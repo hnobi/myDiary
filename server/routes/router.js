@@ -16,10 +16,10 @@ router.route('/auth/signin')
 // entry
 router.route('/entries')
   .post(authToken, EntryValidations.addEntryVaLidation, EntryControllers.addEntry)
-// .get(authToken, EntryControllers.getAllEntry);
+  .get(authToken, EntryControllers.getAllEntry);
 
 router.route('/entries/:entryId')
   .put(authToken, EntryValidations.modifyEntryVaLidation, EntryControllers.modifyEntry)
   .get(authToken, EntryControllers.getEntry)
-  .delete(EntryControllers.deleteEntry);
+  .delete(authToken, EntryControllers.deleteEntry);
 export default router;

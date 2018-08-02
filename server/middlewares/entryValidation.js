@@ -83,5 +83,4 @@ class EntryValidation {
   }
 }
 
-const EntryValidations = new EntryValidation();
-export default EntryValidations;
+export default new EntryValidation();
