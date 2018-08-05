@@ -6,10 +6,9 @@
   "scripts": {
     "start": "babel-node -- server/app.js",
     "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
-    "test": "cross-env NODE_ENV=test && nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
-    "dev": "cross-env NODE_ENV=development &&  npm run table",
+    "test": "set NODE_ENV=test&& npm run migrate&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "dev": "set NODE_ENV=development &&  npm run table",
     "heroku-postbuild": "npm run migrate",
-    "build": "cross-env NODE_ENV=production &&  npm run table",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "migrate": "babel-node -- server/models/tableSchema.js",
     "migrate-test": "cross-env NODE_ENV=test npm run"
