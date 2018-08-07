@@ -29,7 +29,9 @@ body{
 }
 .view-entry{
   width: 90%;
-border: none;
+   
+  
+  border: none;
   display: flex;
   flex-direction: column;
   height:450px;
@@ -412,7 +414,7 @@ td, th {
 }
 
 .view-button{
-  background-color: rgb(4, 78, 4);
+  background-color: black;
   color: #fff;
   padding: 8px;
   font-size: 12px;

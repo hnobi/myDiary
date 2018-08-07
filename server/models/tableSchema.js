@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.TEST_URL;
 const client = new Client(connectionString);
 
 client.connect();
@@ -27,9 +27,9 @@ const createTable = () => {
   
     password VARCHAR(255) NOT NULL,
   
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    createdAt TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP
 
-      updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 
   );
 
@@ -45,8 +45,7 @@ const createTable = () => {
     userId int REFERENCES users(id) ON DELETE CASCADE,
   
     date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP 
-
-
+    
      )`;
 
   client.query(query, (err) => {
