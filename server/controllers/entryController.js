@@ -111,9 +111,10 @@ class EntryController {
       res.status(500).json({
         status: 'Failed',
         message: err.message
-      })
+      });
     });
   }
+
   /**
       * Get a particular entry from the entry model
       * @param {obj} req
@@ -177,7 +178,7 @@ class EntryController {
           status: 'Success',
           message: 'Successfully deleted entry',
           data: results.rows
-        })
+        });
     }).catch((err) => {
       res.status(500).json({
         status: 'Failed',
@@ -187,4 +188,3 @@ class EntryController {
   }
 }
 export default new EntryController();
-
