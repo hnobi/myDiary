@@ -38,7 +38,7 @@ class UserValidation {
       if (!validator.isLength(username, { min: 2, max: 100 })) {
         errors.username = 'username must be between 2 to 100 characters';
       }
-    } else { errors.username = 'username  is required'; }
+    } else {errors.username = 'username  is required'; }
 
     if (!validator.isEmpty(email)) {
       if (!validator.isEmail(email)) {

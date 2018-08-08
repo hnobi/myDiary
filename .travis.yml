@@ -13,6 +13,8 @@ addons:
   chrome: stable
   postgresql: "9.6"
 before_script:
+  - npm install mocha-lcov-reporter --save-dev
+  - npm install supertest 
   - psql -c 'create database MyDairy;' -U postgres
   - npm run migrate
   - curl -L https://codeclimate.com/downloads/test-reporter-latest-linux-amd64 >  ./cc-test-reporter
