@@ -18,12 +18,17 @@
             <a href="index.html"> My Diary</a>
         </div>
     </nav>
-    <main>
-        <!--<img src="./public/img/logo.png" class="top-logo" />-->
+    <div id="loading">
+        <h2>Loading ...</h2>
+    </div>
+    <div id="after-click">
+        <h3>User already have my diary account</h3>
+    </div>
 
+    <main>
         <h2>Sign up</h2>
         <div class="Sign-in-out">
-            <form id="signup" action="./entries.html">
+            <form id="signup">
                 <p>Already have an Account ?
                     <a href="signin.html">Sign in</a>
                 </p>
@@ -34,16 +39,20 @@
 
 
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder=" username..." required>
+                <input type="text" id="username" name="username" placeholder=" username..." required pattern="^[(A-Za-z)|0-9].{1,15}$" title="Username may only contain letters or numbers and must be between 2 and 15 characters">
 
                 <label for="country">Password</label>
-                <input type="password" id="password" name="password" placeholder="password" required>
+                <input type="password" id="password" name="password" placeholder="password" pattern="^((?=.*[0-9])(?=.*[a-zA-Z])).{8,12}$"
+                    title="Password must contain atleast one number and one letter and must be between 8 to 12 characters " required>
 
                 <input type="submit" value="Sign up">
             </form>
         </div>
-        <p class="footer"> copyright © 2018. &nbsp;MyDiary @ Andela.&nbsp; Hammed Noibi.</p>
+        <p class="footer"> copyright © 2018. &nbsp;MyDiary @ Andela.&nbsp; By &nbsp;
+            <small>Hammed Noibi.</small>
+        </p>
     </main>
+    <script src="./public/js/signup.js"></script>
 </body>
 
 </html>

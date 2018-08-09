@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.TEST_URL;
+const connectionString = process.env.DATABASE_URL;
 const client = new Client(connectionString);
 
 client.connect();
@@ -29,7 +29,6 @@ const createTable = () => {
   
     createdAt TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP
 
-    updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 
   );
 
