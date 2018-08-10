@@ -1,4 +1,4 @@
-
+/* eslintignore */
 const signup = (e) => {
 
   document.getElementById('signup').style.display = 'none';
@@ -23,9 +23,8 @@ const signup = (e) => {
   fetch('https://your-diary.herokuapp.com/api/v1/auth/signup', option)
     .then(res => res.json())
     .then((data) => {
-      console.log(data);
-      if (data.status == 'Success') {
-        window.location.replace('./entries.html');
+      if (data.status === 'Success') {
+        window.location.replace('./signin.html');
       } else {
         ExistedUser();
       }
