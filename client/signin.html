@@ -19,16 +19,20 @@
     </div>
   </nav>
   <main>
-    <!--<img src="./public/img/logo.png" class="top-logo" />-->
-
+    <div id="loading">
+      <h2>Loading ...</h2>
+    </div>
+    <div id="after-click">
+      <h3>Invalid username or password</h3>
+    </div>
     <h2>Sign in</h2>
     <div class="Sign-in-out">
-      <form action="./entries.html">
-        <label for="uname">Username</label>
-        <input type="text" id="uname" name="uname" placeholder="username or email" required>
+      <form id="signin">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="username" required>
 
-        <label for="country">Password</label>
-        <input type="password" id="pwd" name="pwd" placeholder="secret password" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="secret password" required>
         <input type="submit" value="Login">
       </form>
       <p>don't have an Account ?
@@ -37,6 +41,7 @@
     </div>
     <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
   </main>
+  <script src="./public/js/login.js"></script>
 </body>
 
 </html>
