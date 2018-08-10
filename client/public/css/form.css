@@ -99,22 +99,23 @@ div.Sign-in-out {
         margin-right: auto;
   }
   #after-click{
-    min-height:50px;
-  background-color:rgb(223, 187, 187);
+    min-height:35px;
+  background-color:rgb(245, 219, 219);
   width: 50%;
-   padding-top: 20px;
-	margin:100px auto -30px auto;
+   padding-top: 10px;
+	margin:auto auto -20px auto;
   text-align: center;
-  border:1px solid red;
+  border:.5px solid red;
 	border-radius: 10px;
 	color: red;
   display: none;
 	}
 	#loading{
-		min-height:50px;
+		min-height:40px;
 		width: 50%;
 		margin:100px auto;
-		display: none;
+    display: none;
+    text-align: center;
 	}
 
   @media screen and (max-width: 930px) {
