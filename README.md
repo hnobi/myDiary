@@ -22,14 +22,14 @@ MyDiary App is an online diary app which allows users to pen down there feeling.
 * Nodejs (Express framework)
 
 ### Pivotal Tracker
-MyDiary app project is broken down into small task with pivotal tracker board. The link to the relevant Pivoltal tracker board is 
+MyDiary app project is broken down into small task with pivotal tracker board. The link to the relevant Pivoltal tracker board is (https://www.pivotaltracker.com/n/projects/2183562)
 
 ### API Enpoint
 API Endpoints is hosted at (https://your-diary.herokuapp.com/api/v1)
 
 ### UI Templates
 The application is hosted online on gh-pages with 
- [MyDiary] (https://hnobi.github.io/MyDiary/UI)
+ [MyDiary] (https://hnobi.github.io/MyDiary/UI/)
 
 
 ## Features
