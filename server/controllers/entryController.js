@@ -27,20 +27,22 @@ class EntryController {
         const sql = 'INSERT INTO entries(title, date, entry,userid) VALUES ($1, $2, $3, $4)';
         const params = [title, date, entry, userid];
         db.query(sql, params)
-          .then(() => res.status(201)
-            .json({
-              status: 'Success',
-              message: 'Successfully added new entry',
-              data: {
-                userid,
-                title,
-                date,
-                entry
-              }
-            })).catch(err => res.status(500).json({
-              status: 'Failed',
-              message: err.message
-            }));
+          .then(() => {
+            return res.status(201)
+              .json({
+                status: 'Success',
+                message: 'Successfully added new entry',
+                data: {
+                  userid,
+                  title,
+                  date,
+                  entry
+                }
+              })
+          }).catch(err => res.status(500).json({
+            status: 'Failed',
+            message: err.message
+          }));
       }).catch(err => res.status(500).json({
         status: 'Failed',
         message: err.message

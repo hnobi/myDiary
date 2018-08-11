@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sigin</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/form.css" />
+
+</head>
+
+<body>
+  <nav>
+    <div id="logo">
+      <a href="index.html"> My Diary</a>
+    </div>
+  </nav>
+  <main>
+    <div id="loading">
+      <h2>Loading ...</h2>
+    </div>
+    <div id="after-click">
+      <h3>Invalid username or password</h3>
+    </div>
+    <h2>Sign in</h2>
+    <div class="Sign-in-out">
+      <form id="signin">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="secret password" required>
+        <input type="submit" value="Login">
+      </form>
+      <p>don't have an Account ?
+        <a href="signup.html">Sign up</a>
+      </p>
+    </div>
+    <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  </main>
+  <script src="./public/js/login.js"></script>
+</body>
+
+</html>
