@@ -7,7 +7,6 @@
   <title>Add Entry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
-  <script src="main.js"></script>
 </head>
 
 <body>
@@ -33,36 +32,31 @@
         </li>
       </ul>
     </div>
-    <!-- <button> Welcome
-          <span style="color:teal;font-weight: bolder;margin-right: 10px;">Hammed</span>
-        </button> -->
     <a href="user_detail.html" id="user">
       <div class="user">
         <img src="./public/img/user.jpg" alt="User" width="96" height="96"> Hammed
       </div>
     </a>
   </nav>
-
-
-
   <section>
+    <h3>success</h3>
     <h2 class="heading">Add Entry</h2>
-
     <div class="container">
-      <form action="./entries.html">
+      <form id="add-entry">
         <label for="title">Entry title</label>
         <input type="text" id="title" name="title" placeholder="Your title..">
         <label for="date">Date</label>
-        <input type="date" id="date" ame="date">
+        <input type="date" id="date" name="date">
         <label for="entry">Entry</label>
         <textarea id="entry" name="entry" placeholder="Write your journal..." style="height:200px"></textarea>
-
         <input type="submit" value="Submit">
       </form>
     </div>
   </section>
 
   <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="./public/js/add-entry.js"></script>
+
 </body>
 
 </html>

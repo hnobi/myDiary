@@ -19,13 +19,10 @@ const login = (e) => {
   fetch('https://your-diary.herokuapp.com/api/v1/auth/signin', option)
     .then(res => res.json())
     .then((data) => {
-      console.log(data.token);
       document.getElementById('loading').style.display = 'none';
-
       if (data.status === 'Success') {
         window.localStorage.setItem('token', data.token);
         window.location.replace('./add-entry.html');
-        console.log(localStorage.token);
       } else {
         invalidUser();
       }
