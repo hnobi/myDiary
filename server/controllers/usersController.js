@@ -35,8 +35,7 @@ class UsersController {
               message: 'Successfully created myDiary account',
               data: {
                 username: req.body.username,
-                email: req.body.email,
-                password: hashedPassword
+                email: req.body.email
               }
             })).catch(err => res.status(500).json({
               status: 'Failed',

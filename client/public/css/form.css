@@ -111,9 +111,9 @@ div.Sign-in-out {
   display: none;
 	}
 	#loading{
-		min-height:40px;
-		width: 50%;
-		margin:100px auto;
+   min-height:40px;
+   width: 50%;
+   margin:100px auto;
     display: none;
     text-align: center;
 	}
