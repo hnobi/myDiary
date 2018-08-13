@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Add Entry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./public/css/message.css">
   <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
 </head>
 
@@ -39,16 +40,23 @@
     </a>
   </nav>
   <section>
-    <h3>success</h3>
+    <div id="loading">
+      <h2>Loading ...</h2>
+    </div>
+    <div id="success-message">
+      <span id="close">&times;</span>
+      <h3>Successfully added new entry</h3>
+    </div>
     <h2 class="heading">Add Entry</h2>
     <div class="container">
       <form id="add-entry">
         <label for="title">Entry title</label>
-        <input type="text" id="title" name="title" placeholder="Your title..">
+        <p id="existed-title">Title already exit in your diary</p>
+        <input type="text" id="title" name="title" placeholder="Your title.." required>
         <label for="date">Date</label>
         <input type="date" id="date" name="date">
         <label for="entry">Entry</label>
-        <textarea id="entry" name="entry" placeholder="Write your journal..." style="height:200px"></textarea>
+        <textarea id="entry" name="entry" placeholder="Write your journal..." required maxlength="500" and minlength="10"></textarea>
         <input type="submit" value="Submit">
       </form>
     </div>

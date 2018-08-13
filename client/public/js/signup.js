@@ -19,7 +19,6 @@ const signup = (e) => {
     body: JSON.stringify(post)
 
   };
-  console.log('working');
   fetch('https://your-diary.herokuapp.com/api/v1/auth/signup', option)
     .then(res => res.json())
     .then((data) => {

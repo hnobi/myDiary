@@ -1,0 +1,32 @@
+#loading{
+  min-height:40px;
+  width: 50%;
+  margin:100px auto;
+   display: none;
+   text-align: center;
+ }
+
+#success-message{
+  background-color: #e0dbdb;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid rgb(133, 97, 7);
+    width: 60%;
+    display: none;
+}
+#close {
+  color: rgb(133, 97, 7);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+#close:hover,
+#close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#existed-title{
+  color:red;
+  display: none;
+}

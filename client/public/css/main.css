@@ -273,9 +273,9 @@ font-family:  'Trebuchet MS';
   color:#ffe57f;
   text-align:  center;
    /* position:fixed; */
-   bottom:-70px;
+   /* bottom:0; */
    width:100%;
-   margin-top: ;
+   margin-top: 50px;
    background-color: #212121;
    height: 30px;
    padding-top: 50px;

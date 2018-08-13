@@ -19,6 +19,7 @@ const login = (e) => {
   fetch('https://your-diary.herokuapp.com/api/v1/auth/signin', option)
     .then(res => res.json())
     .then((data) => {
+      console.log(data);
       document.getElementById('loading').style.display = 'none';
       if (data.status === 'Success') {
         window.localStorage.setItem('token', data.token);
