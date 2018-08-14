@@ -124,7 +124,7 @@ class EntryController {
   getEntry(req, res) {
     const { entryId } = req.params;
 
-    const sql = 'SELECT id FROM entries WHERE userid = $1 AND id = $2',
+    const sql = 'SELECT * FROM entries WHERE userid = $1 AND id = $2',
       param = [req.decoded.userid, entryId];
     db.query(sql, param).then((result) => {
       if (result.rowCount === 0) {
@@ -136,11 +136,9 @@ class EntryController {
       }
       return res.status(200)
         .json({
-          data: {
-            status: 'Success',
-            message: 'Successfully retrieve an entry',
-            entry: result
-          }
+          status: 'Success',
+          message: 'Successfully retrieve an entry',
+          data: result.rows[0]
         });
 
 

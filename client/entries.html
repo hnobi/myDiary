@@ -10,7 +10,7 @@
   <script src="main.js"></script>
 </head>
 
-<body>
+<body id="body" onload="getAllEntry();">
   <nav class="navcolor">
     <div id="logo">
       <a href="index.html" class="nav-logo ">
@@ -63,59 +63,13 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>22-10-2018</td>
-          <td>My day</td>
-          <td>I love being a able to look back ...</td>
-          <td>
-            <a href="view-entry.html">
-              <button class="view-button">View Entry</button>
-            </a>
-          </td>
-          <!-- <td class="delete"></td> -->
-
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>12-02-2018</td>
-          <td>My hommie</td>
-          <td> the he left for new york... </td>
-          <td>
-            <a href="view-entry.html">
-              <button class="view-button">View Entry</button>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>02-11-2018</td>
-          <td>My day</td>
-          <td>sure love is being a able to look back ...</td>
-          <td>
-            <a href="view-entry.html">
-              <button class="view-button">View Entry</button>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>19-09-2018</td>
-          <td>My hommie</td>
-          <td> then he left for good... </td>
-          <td>
-            <a href="view-entry.html">
-              <button class="view-button">View Entry</button>
-            </a>
-          </td>
-        </tr>
+      <tbody id="tbody">
       </tbody>
     </table>
     <!-- </div> -->
   </section>
-
   <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="public/js/get-all-entry.js"></script>
 </body>
 
 </html>
