@@ -26,21 +26,30 @@ class UsersController {
               message: 'User already exist'
             });
         }
-        const sql = 'INSERT INTO users(fullname , username, email, password) VALUES ($1, $2,$3,$4)';
+        const sql = 'INSERT INTO users(fullname , username, email, password) VALUES ($1, $2,$3,$4) RETURNING *';
         const params = [fullname, username, email, hashedPassword];
         db.query(sql, params)
-          .then(() => res.status(201)
-            .json({
-              status: 'Success',
-              message: 'Successfully created myDiary account',
-              data: {
-                username: req.body.username,
-                email: req.body.email
-              }
-            })).catch(err => res.status(500).json({
-              status: 'Failed',
-              message: err.message
-            }));
+          .then((user) => {
+            const payload = {
+              fullname,
+              username,
+              userid: user.rows[0].id
+            };
+            const token = jwt.sign(payload, process.env.SECRET_KEY, {
+              expiresIn: 60 * 60 * 10 // 10 hours
+            });
+            req.token = token;
+            res.status(201)
+              .json({
+                status: 'Success',
+                message: 'Successfully created myDiary account',
+                data: user.rows[0],
+                token
+              });
+          }).catch(err => res.status(500).json({
+            status: 'Failed',
+            message: err.message
+          }));
       }).catch(err => res.status(500).json({
         status: 'Failed',
         message: err.message
