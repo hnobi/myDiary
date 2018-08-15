@@ -1,5 +1,8 @@
+const token = localStorage.getItem('token');
+if (token === null) {
+  window.location.href = './signin.html';
+}
 const getAllEntry = () => {
-  const token = localStorage.getItem('token');
   const option = {
     method: 'GET',
     headers: {
@@ -10,7 +13,6 @@ const getAllEntry = () => {
   };
   fetch('https://your-diary.herokuapp.com/api/v1/entries', option)
     .then(res => res.json()).then((data) => {
-      console.log(data.entries);
       let userEntry = '';
       const datas = data.entries;
       datas.map((entry) => {
@@ -18,7 +20,7 @@ const getAllEntry = () => {
         <td>${entry.id}</td>
         <td>${entry.date}</td>
         <td>${entry.title}</td>
-        <td>${entry.entry.split(' ')[0]} ${entry.entry.split(' ')[1]}...</td>
+        <td>${entry.entry.split(' ')[0]} ${entry.entry.split(' ')[1]} ...</td>
         <td>
           <a>
         <button class="view-button" data-entryid=${entry.id} >View Entry</button>
@@ -33,8 +35,6 @@ const singleEntry = (e) => {
 
   if (e.target.classList.contains('view-button')) {
     const entryId = e.target.getAttribute('data-entryid');
-
-    console.log(entryId);
     window.localStorage.setItem('entryId', entryId);
     window.location.href = './view-entry.html';
   }
