@@ -23,7 +23,8 @@ const signup = (e) => {
     .then(res => res.json())
     .then((data) => {
       if (data.status === 'Success') {
-        window.location.replace('./signin.html');
+        window.localStorage.setItem('token', data.token);
+        window.location.replace('./add-entry.html');
       } else {
         ExistedUser();
       }

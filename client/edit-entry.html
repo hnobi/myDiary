@@ -36,32 +36,30 @@
             <a href="index.html">Logout</a>
           </li>
       </ul>
-    </div>
-    <!-- <button> Welcome
-          <span style="color:teal;font-weight: bolder;margin-right: 10px;">Hammed</span>
-        </button> -->
-    <a href="user_detail.html" id="user">
-      <div class="user">
-        <img src="./public/img/user.jpg" alt="User" width="96" height="96"> Hammed
-      </div>
-    </a>
+      <a href="user_detail.html" id="user">
+        <div class="user">
+          <img src="./public/img/user.jpg" alt="User" width="96" height="96"> Hammed
+        </div>
+      </a>
   </nav>
-
-
-
   <section>
+    <div id="loading">
+      <h2>Loading ...</h2>
+    </div>
+    <div id="success-message">
+      <span id="close">&times;</span>
+      <h3>Successfully modify this entry</h3>
+    </div>
     <h2 class="heading">Modify Entry</h2>
 
     <div class="container">
-      <form action="./entries.html">
+      <form id="modify-entry">
         <label for="title">Entry title</label>
         <input type="text" id="title" name="title" value="world cup final">
         <label for="date" value="Date()">Date</label>
         <input type="date" id="date" name="date">
         <label for="entry">Entry</label>
-        <textarea id="entry" name="entry" style="height:200px">"How has this changed me?or Wha t might I have done differently eflective writing is an analytical practice in which
-        the writer describes a real or imaginary scene, event, interaction, passing thought, memory, form, adding a personal
-        reflection on the meaning of the item or incident, thou ght, feeling, emotion, or situation in his or h er life.
+        <textarea id="entry" name="entry" style="height:200px">, feeling, emotion, or situation in his or h er life.
         Many reflectiv e writers keep in mind questions" </textarea>
 
         <input type="submit" value="Submit">
@@ -70,6 +68,7 @@
   </section>
 
   <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="public/js/single-entry.js"></script>
 </body>
 
 </html>

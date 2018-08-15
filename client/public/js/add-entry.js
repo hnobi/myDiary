@@ -1,9 +1,12 @@
+const token = localStorage.getItem('token');
+if (token === null) {
+  window.location.href = './signin.html';
+}
 const addEntry = (e) => {
   e.preventDefault();
   const message = document.getElementById('success-message');
   const close = document.getElementById('close');
   document.getElementById('loading').style.display = 'block';
-  const token = localStorage.getItem('token');
   const post = {
     title: document.getElementById('title').value,
     date: document.getElementById('date').value,
@@ -16,14 +19,10 @@ const addEntry = (e) => {
       'x-access-token': token,
     },
     body: JSON.stringify(post)
-
   };
   fetch('https://your-diary.herokuapp.com/api/v1/entries', option)
     .then(res => res.json())
     .then((data) => {
-      if (token === null) {
-        window.location.href = './signin.html';
-      }
       document.getElementById('loading').style.display = 'none';
       if (data.status === 'Success') {
         message.style.display = 'block';
