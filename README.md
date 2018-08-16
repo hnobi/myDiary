@@ -29,7 +29,7 @@ API Endpoints is hosted at (https://your-diary.herokuapp.com/api/v1)
 
 ### UI Templates
 The application is hosted online on gh-pages with 
- [MyDiary] (https://hnobi.github.io/MyDiary/UI/)
+ [MyDiary] (https://hnobi.github.io/myDiary/UI/)
 
 
 ## Features

@@ -7,10 +7,10 @@
   <title>edit Entry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
-  <script src="main.js"></script>
+  <link rel="stylesheet" href="./public/css/message.css">
 </head>
 
-<body>
+<body onload="modifyValue();">
   <nav class="navcolor">
     <div id="logo" class="nav-logo">
       <a href="index.html" class="nav-logo ">
@@ -53,7 +53,7 @@
     <h2 class="heading">Modify Entry</h2>
 
     <div class="container">
-      <form id="modify-entry">
+      <form id="modify-entry" onsubmit="modifyEntry">
         <label for="title">Entry title</label>
         <input type="text" id="title" name="title" value="world cup final">
         <label for="date" value="Date()">Date</label>
@@ -68,6 +68,7 @@
   </section>
 
   <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="./public/js/default-value-modify.js"> </script>
   <script src="public/js/single-entry.js"></script>
 </body>
 
