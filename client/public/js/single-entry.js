@@ -14,8 +14,6 @@ const getEntry = () => {
   fetch(`https://your-diary.herokuapp.com/api/v1/entries/${entryId}`, option)
     .then(res => res.json()).then((data) => {
       const entry = data.data;
-      // console.log(JSON.stringify(entry));
-      // console.log('and ' + JSON.parse(JSON.stringify(entry)));
       localStorage.setItem('strignifiedData', JSON.stringify(entry))
 
       document.getElementById('title').innerHTML = `${entry.title}`;
@@ -23,7 +21,6 @@ const getEntry = () => {
       document.getElementById('date').innerHTML = `${entry.date}`;
     });
 };
-//  document.getElementById('body').addEventListener("load", getEntry);
 const modifyEntry = (e) => {
   e.preventDefault();
   const message = document.getElementById('success-message');
@@ -58,6 +55,7 @@ const modifyEntry = (e) => {
 
   close.onclick = function () {
     message.style.display = 'none';
+    window.location.replace('./entries.html');
   };
 };
 document.getElementById('modify-entry').addEventListener('submit', modifyEntry, false);
