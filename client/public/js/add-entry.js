@@ -23,6 +23,7 @@ const addEntry = (e) => {
   fetch('https://your-diary.herokuapp.com/api/v1/entries', option)
     .then(res => res.json())
     .then((data) => {
+      console.log(data);
       document.getElementById('loading').style.display = 'none';
       if (data.status === 'Success') {
         message.style.display = 'block';
@@ -35,6 +36,8 @@ const addEntry = (e) => {
 
   close.onclick = function () {
     message.style.display = 'none';
+    document.getElementById('title').value = '';
+    document.getElementById('entry').value = '';
   };
 };
 document.getElementById('add-entry').addEventListener('submit', addEntry, false);

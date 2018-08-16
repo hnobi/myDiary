@@ -7,7 +7,7 @@
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
-  <script src="main.js"></script>
+  <link rel="stylesheet" href="public/css/message.css">
 </head>
 
 <body id="body" onload="getEntry();">
@@ -36,9 +36,6 @@
         </li>
       </ul>
     </div>
-    <!-- <button> Welcome
-          <span style="color:teal;font-weight: bolder;margin-right: 10px;">Hammed</span>
-        </button> -->
     <a href="user_detail.html" id="user">
       <div class="user">
         <img src="./public/img/user.jpg" alt="User" width="96" height="96"> Hammed
@@ -46,6 +43,13 @@
     </a>
   </nav>
   <section>
+    <!-- <div id="loading">
+      <h2>Deleting ...</h2>
+    </div> -->
+    <div id="success-message">
+      <span id="close">&times;</span>
+      <h3 style="color: red;">Successfully deleted an entry</h3>
+    </div>
     <h2 class="heading">Entry information</h2>
 
     <div class="container view-entry">
@@ -67,7 +71,7 @@
         <a href="edit-entry.html">
           <button class="edit edit-btn">edit</button>
         </a>
-        <a id="delete" onclick=" deleteEntry();">
+        <a id="delete" onclick="deleteEntry();">
           <button class="delete  delete-btn">delete</button>
         </a>
       </div>
@@ -75,6 +79,7 @@
   </section>
   <p class="footer "> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
   <script src="public/js/single-entry.js"></script>
+  <script src="public/js/delete-entry.js"></script>
 </body>
 
 </html>

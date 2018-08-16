@@ -15,6 +15,7 @@ const getAllEntry = () => {
     .then(res => res.json()).then((data) => {
       let userEntry = '';
       const datas = data.entries;
+      document.getElementById('total-entries').innerHTML = `${datas.length}`;
       datas.map((entry) => {
         userEntry += `<tr>
         <td>${entry.id}</td>
@@ -29,6 +30,7 @@ const getAllEntry = () => {
       </tr > `;
       });
       document.getElementById('tbody').innerHTML = userEntry;
+
     });
 };
 const singleEntry = (e) => {
