@@ -27,9 +27,11 @@ const createTable = () => {
   
     password VARCHAR(255) NOT NULL,
   
-    createdAt TIMESTAMP  NULL DEFAULT CURRENT_TIMESTAMP
+    createdAt timestamptz NULL DEFAULT CURRENT_TIMESTAMP,
 
+    remainder INTEGER NOT NULL DEFAULT  0,
 
+    image VARCHAR(255)  
   );
 
 

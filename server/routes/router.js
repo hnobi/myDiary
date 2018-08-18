@@ -5,13 +5,16 @@ import UsersControllers from '../controllers/usersController';
 import UserValidation from '../middlewares/userValidation';
 import authToken from '../middlewares/authToken';
 
-const router = express.Router();
-
+const router = express.Router()
 // User signup and signin
 router.route('/auth/signup')
   .post(UserValidation.signUp, UsersControllers.signUp);
 router.route('/auth/signin')
   .post(UserValidation.signIn, UsersControllers.signIn);
+// User details
+router.route('/user/details')
+  .put(authToken, UsersControllers.updateUserProfile)
+  .get(authToken, UsersControllers.userDetails);
 
 // entry
 router.route('/entries')

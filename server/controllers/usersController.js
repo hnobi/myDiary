@@ -1,7 +1,15 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import cloudinary from 'cloudinary';
 import db from '../models/db';
 
+require('dotenv').config();
+
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret
+});
 
 /**
  * @export
@@ -102,6 +110,42 @@ class UsersController {
           message: err.message
         });
     });
+  }
+
+  userDetails(req, res) {
+    db.query(`SELECT * FROM users WHERE id = '${req.decoded.userid}'`)
+      .then((user) => res.status(200)
+        .json({
+          status: 'Success',
+          message: 'successfull retrived user details',
+          data: {
+            id: user.rows[0].id,
+            fullname: user.rows[0].fullname,
+            username: user.rows[0].username,
+            email: user.rows[0].email,
+            image: user.rows[0].image,
+            remainder: user.rows[0].remainder,
+          }
+        }))
+      .catch((err) => { console.log(err); });
+  }
+
+  updateUserProfile(req, res) {
+    const cloudImage = cloudinary.uploader.upload(req.files.image.path, (result) => result);
+
+
+    const { fullname, username, remainder } = req.body,
+      hashedPassword = bcrypt.hashSync(req.body.password, 10);
+    const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, image= $4, remainder= $5 WHERE id=$5';
+    const params = [fullname, username, hashedPassword, cloudImage.url, remainder];
+    db.query(sql, params)
+      .then((user) => {
+        res.status(200)
+          .json({
+            status: 'success',
+            user
+          });
+      });
   }
 }
 export default new UsersController();

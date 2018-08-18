@@ -53,7 +53,10 @@
     <main id="user-details">
       <div class="profile_picx" style="margin:30px auto">
         <img src="public/img/user.jpg" alt="pofile picture display">
-        <!-- <input type=" file " value="change image "> -->
+        <form method="post" enctype="multipart/form-data" action="/upload">
+          <input type="file" name="userimage">
+          <input type="submit" value="Submit">
+        </form>
       </div>
       <!-- <div class="acct_details "> -->
       <div class="container ">
