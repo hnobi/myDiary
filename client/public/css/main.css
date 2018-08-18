@@ -273,8 +273,8 @@ font-family:  'Trebuchet MS';
 .footer{
   color:#ffe57f;
   text-align:  center;
-   /* position:fixed; */
-   /* bottom:0; */
+   position:fixed;
+   bottom:0;
    width:100%;
    margin-top: 50px;
    background-color: #212121;
@@ -370,6 +370,7 @@ border-radius: 10px;
 section{
   width:90%;
   margin:10px auto;
+  height: 106vh;
 }
 h2.heading{
 text-align: center;

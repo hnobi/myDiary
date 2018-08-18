@@ -1,6 +1,4 @@
-import entryData from '../models/entries';
 import db from '../models/db';
-
 /**
 * @export
 *  @class EntryController
