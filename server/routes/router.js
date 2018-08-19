@@ -4,6 +4,8 @@ import EntryValidations from '../middlewares/entryValidation';
 import UsersControllers from '../controllers/usersController';
 import UserValidation from '../middlewares/userValidation';
 import authToken from '../middlewares/authToken';
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 const router = express.Router()
 // User signup and signin
@@ -13,7 +15,7 @@ router.route('/auth/signin')
   .post(UserValidation.signIn, UsersControllers.signIn);
 // User details
 router.route('/user/details')
-  .put(authToken, UsersControllers.updateUserProfile)
+  .put(authToken, multipartMiddleware, UsersControllers.updateUserProfile)
   .get(authToken, UsersControllers.userDetails);
 
 // entry
