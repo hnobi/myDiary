@@ -127,7 +127,7 @@ class UsersController {
           }
         }))
       .catch((err) => { console.log(err); });
-  }
+  } z
 
   updateimage(req, res) {
     cloudinary.uploader.upload(req.files.image.path, (result) => {
