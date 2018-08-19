@@ -6,11 +6,10 @@ import db from '../models/db';
 require('dotenv').config();
 
 cloudinary.config({
-  cloud_name: process.env.cloud_name,
-  api_key: process.env.api_key,
-  api_secret: process.env.api_secret
+  cloud_name: process.env.Cloud_name,
+  api_key: process.env.API_Key,
+  api_secret: process.env.API_Secret
 });
-
 /**
  * @export
  * @class UsersController
@@ -130,22 +129,33 @@ class UsersController {
       .catch((err) => { console.log(err); });
   }
 
+  updateimage(req, res) {
+    cloudinary.uploader.upload(req.files.image.path, (result) => {
+      const { userid } = req.decoded;
+      db.query(`UPDATE users SET image ='${result.url}' WHERE id='${userid}' RETURNING image`).then((user) => {
+        res.status(200).json({
+          status: 'success',
+          imageUrl: user.rows[0].image
+        })
+      }).catch(err => console.log(err))
+    });
+  };
   updateUserProfile(req, res) {
-    const cloudImage = cloudinary.uploader.upload(req.files.image.path, (result) => result);
+    const { userid } = req.decoded;
     const { fullname, username, remainder } = req.body,
       hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    const { userid } = req.decoded;
-    const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, image= $4, remainder= $5 WHERE id=$6  RETURNING *';
-    const params = [fullname, username, hashedPassword, cloudImage.secure_url, remainder, userid];
-    db.query(sql, params)
-      .then((user) => {
-        console.log(req.files)
-        res.status(200)
-          .json({
-            status: 'success',
-            user
-          });
-      });
-  }
+    const params = [fullname, username, hashedPassword, remainder, userid];
+    const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, remainder= $4 WHERE id=$5  RETURNING *';
+    db.query(sql, params).then((user) => {
+
+      res.status(200).json({
+        status: 'Success',
+        message: 'successfully modified your profile',
+        userDetails: user.rows[0]
+
+      })
+    }).catch(err => console.log(err))
+  };
+
 }
 export default new UsersController();
