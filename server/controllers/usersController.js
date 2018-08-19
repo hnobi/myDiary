@@ -149,7 +149,7 @@ class UsersController {
     db.query(sql, params).then((user) => {
 
       res.status(200).json({
-        status: 'success',
+        status: 'Success',
         message: 'successfully modified your profile',
         userDetails: user.rows[0]
 
