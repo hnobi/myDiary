@@ -5,7 +5,7 @@ import db from '../models/db';
 
 require('dotenv').config();
 
-let a = cloudinary.config({
+cloudinary.config({
   cloud_name: process.env.Cloud_name,
   api_key: process.env.API_Key,
   api_secret: process.env.API_Secret
@@ -127,19 +127,19 @@ class UsersController {
           }
         }))
       .catch((err) => { console.log(err); });
-  } z
+  }
 
   updateimage(req, res) {
     cloudinary.uploader.upload(req.files.image.path, (result) => {
       const { userid } = req.decoded;
-      db.query(`UPDATE users SET image ='${result.url}' WHERE id='${userid}'  RETURNING image`).then((user) => {
+      db.query(`UPDATE users SET image ='${result.url}' WHERE id='${userid}' RETURNING image`).then((user) => {
         res.status(200).json({
           status: 'success',
           imageUrl: user.rows[0].image
         })
       }).catch(err => console.log(err))
     });
-  }
+  };
   updateUserProfile(req, res) {
     const { userid } = req.decoded;
     const { fullname, username, remainder } = req.body,

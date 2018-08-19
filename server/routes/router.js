@@ -5,8 +5,6 @@ import EntryValidations from '../middlewares/entryValidation';
 import UsersControllers from '../controllers/usersController';
 import UserValidation from '../middlewares/userValidation';
 import authToken from '../middlewares/authToken';
-var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
 
 const multipartMiddleware = multipart();
 
@@ -18,10 +16,10 @@ router.route('/auth/signin')
   .post(UserValidation.signIn, UsersControllers.signIn);
 // User details
 router.route('/user/details')
-  .put(authToken, multipartMiddleware, UsersControllers.updateUserProfile)
+  .put(authToken, UsersControllers.updateUserProfile)
   .get(authToken, UsersControllers.userDetails);
 router.route('/user/upload')
-  .put(authToken, multipartMiddleware, UsersControllers.updateimage)
+  .put(authToken, multipartMiddleware, UsersControllers.updateimage);
 
 // entry
 router.route('/entries')
