@@ -12,7 +12,7 @@
   <script src="main.js"></script>
 </head>
 
-<body>
+<body onload="getUserDetails();">
   <nav class="navcolor">
     <div id="logo" class="nav-logo">
       <a href="index.html" class="nav-logo ">
@@ -62,15 +62,19 @@
       <div class="container ">
         <form action="./user_detail.html ">
           <label for="name ">Name</label>
-          <input type="text" id="name " name="name" value="Hammed Noibi">
+          <input type="text" id="fullname " name="name">
           <label for="ename">Email</label>
-          <input type="email" id="email " name="email " value="hnobi08@gmail.com" disabled>
+          <input type="email" id="email " name="email " disabled>
           <label for=" ">Diary's name</label>
-          <input type="text" id="uname" name="uname" value="Hammed's diary">
+          <input type="text" id="username" name="username">
           <label>Remainder setting (days)</label>
-          <input type="text" id="setting" name="setting" value="2">
+          <input type="text" id="remainder" name="remainder">
           <label>Change password</label>
-          <input type="password" id="pwd" name="pwd">
+          <input type="password" id="password" name="password">
+          <label></label>
+
+          <input type="file" name="userimage">
+
           <input type="submit" value="Save changes">
         </form>
       </div>
@@ -83,6 +87,7 @@
   </section>
 
   <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="./public/js/user-detail.js"></script>
 </body>
 
 </html>
