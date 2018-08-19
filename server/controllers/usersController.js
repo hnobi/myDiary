@@ -132,14 +132,14 @@ class UsersController {
 
   updateUserProfile(req, res) {
     const cloudImage = cloudinary.uploader.upload(req.files.image.path, (result) => result);
-
-
     const { fullname, username, remainder } = req.body,
       hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, image= $4, remainder= $5 WHERE id=$5';
-    const params = [fullname, username, hashedPassword, cloudImage.url, remainder];
+    const { userid } = req.decoded;
+    const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, image= $4, remainder= $5 WHERE id=$6  RETURNING *';
+    const params = [fullname, username, hashedPassword, cloudImage.secure_url, remainder, userid];
     db.query(sql, params)
       .then((user) => {
+        console.log(req.files)
         res.status(200)
           .json({
             status: 'success',
