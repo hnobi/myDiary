@@ -23,6 +23,7 @@ const login = (e) => {
       document.getElementById('loading').style.display = 'none';
       if (data.status === 'Success') {
         window.localStorage.setItem('token', data.token);
+
         window.location.replace('./add-entry.html');
       } else {
         invalidUser();

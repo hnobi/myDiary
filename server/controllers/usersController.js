@@ -79,6 +79,7 @@ class UsersController {
             fullname: user.rows[0].fullname,
             username: user.rows[0].username,
             userid: user.rows[0].id
+
           };
           const token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: 60 * 60 * 10 // 10 hours
@@ -91,7 +92,9 @@ class UsersController {
               data: {
                 id: user.rows[0].id,
                 username: user.rows[0].username,
-                email: user.rows[0].email
+                email: user.rows[0].email,
+                image: user.rows[0].image
+
               },
               token
             });
@@ -122,6 +125,7 @@ class UsersController {
             fullname: user.rows[0].fullname,
             username: user.rows[0].username,
             email: user.rows[0].email,
+            password: user.rows[0].password,
             image: user.rows[0].image,
             remainder: user.rows[0].remainder,
           }
