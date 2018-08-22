@@ -8,8 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="./public/css/form.css" />
-
-  <script src="main.js"></script>
+  <link rel="stylesheet" href="./public/css/message.css">
 </head>
 
 <body onload="getUserDetails();">
@@ -42,9 +41,11 @@
       <div class="user">
         <img src="./public/img/user.jpg" alt="User" width="96" height="96"> Hammed
       </div>
-
     </a>
   </nav>
+  <div id="loading">
+    <h2>Loading ...</h2>
+  </div>
   <section>
     <div>
       <h2 class="heading">User Account</h2>
@@ -52,19 +53,17 @@
     </div>
     <main id="user-details">
       <div class="profile_picx" style="margin:30px auto">
-        <img src="public/img/user.jpg" alt="pofile picture display">
-        <form method="post" enctype="multipart/form-data" action="/upload">
-          <input type="file" name="userimage">
-          <input type="submit" value="Submit">
+        <img alt="profile picture" id="user-image">
+        <form id="update-image">
+          <input type="file" id="image">
         </form>
       </div>
-      <!-- <div class="acct_details "> -->
-      <div class="container ">
-        <form action="./user_detail.html ">
+      <div class="container">
+        <form id="update-user">
           <label for="name ">Name</label>
-          <input type="text" id="fullname " name="name">
+          <input type="text" id="fullname" name="name">
           <label for="ename">Email</label>
-          <input type="email" id="email " name="email " disabled>
+          <input type="email" id="email" name="email" disabled>
           <label for=" ">Diary's name</label>
           <input type="text" id="username" name="username">
           <label>Remainder setting (days)</label>
@@ -72,20 +71,11 @@
           <label>Change password</label>
           <input type="password" id="password" name="password">
           <label></label>
-
-          <input type="file" name="userimage">
-
           <input type="submit" value="Save changes">
         </form>
       </div>
-      <!-- </div> -->
-
     </main>
-
-
-
   </section>
-
   <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
   <script src="./public/js/user-detail.js"></script>
 </body>
