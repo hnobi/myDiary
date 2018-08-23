@@ -25,6 +25,8 @@ const signup = (e) => {
       if (data.status === 'Success') {
         window.localStorage.setItem('token', data.token);
         window.location.replace('./add-entry.html');
+        window.localStorage.setItem('name', (data.data.username));
+        window.localStorage.setItem('image', (data.data.image));
       } else {
         ExistedUser();
       }

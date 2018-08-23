@@ -7,7 +7,6 @@
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
-  <script src="main.js"></script>
 </head>
 
 <body id="body" onload="getAllEntry();">
@@ -20,7 +19,7 @@
     </div>
     <div style="margin: auto;">
       <p style="height: 27px;color:white"> Total entries:
-        <span id="total-entries"></span>
+        <span id="total-entries">0</span>
       </p>
     </div>
 
@@ -43,7 +42,8 @@
 
     <a href="user_detail.html" id="user">
       <div class="user">
-        <img src="./public/img/user.jpg" alt="User" width="96" height="96"> Hammed
+        <img src="./public/img/default-img.png" alt="User" width="96" height="96" id="nav-img">
+        <span id="nav-name"></span>
       </div>
     </a>
 

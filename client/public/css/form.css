@@ -2,7 +2,7 @@
     height: 100%;
     background: url("./../img/bg.jpg") ;  
     width:100%;
-    /* height: auto; */
+    height: auto;
     background-size: cover;
   }
   nav{
@@ -11,7 +11,10 @@
       /* height: 20px;; */
   }
 main{
-    margin-top: 30px
+    margin-top: 30px;
+}
+section{
+    /* height: 100vh; */
 }
 .Sign-in-out{
     width: 20%;

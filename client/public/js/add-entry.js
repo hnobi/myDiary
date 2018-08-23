@@ -2,6 +2,16 @@ const token = localStorage.getItem('token');
 if (token === null) {
   window.location.href = './signin.html';
 }
+
+//   ========= navbar userdetail ======
+const userName = localStorage.getItem('name');
+const userImg = localStorage.getItem('image');
+document.getElementById('nav-name').innerHTML = userName
+document.getElementById('nav-img').src = userImg;
+//   ========= navbar userdetail ends ======
+
+
+
 const addEntry = (e) => {
   e.preventDefault();
   const message = document.getElementById('success-message');
@@ -23,7 +33,6 @@ const addEntry = (e) => {
   fetch('https://your-diary.herokuapp.com/api/v1/entries', option)
     .then(res => res.json())
     .then((data) => {
-      console.log(data);
       document.getElementById('loading').style.display = 'none';
       if (data.status === 'Success') {
         message.style.display = 'block';
