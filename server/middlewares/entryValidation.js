@@ -31,8 +31,8 @@ class EntryValidation {
       }
     } else { errors.title = 'Title of entry is required'; }
     if (!validator.isEmpty(entry)) {
-      if (!validator.isLength(entry, { min: 10, max: 2000 })) {
-        errors.entry = 'Diary entry provided must be between 10 to 2000 characters';
+      if (!validator.isLength(entry, { min: 10, max: 500 })) {
+        errors.entry = 'Diary entry provided must be between 10 to 500 characters';
       }
     } else { errors.entry = 'Diary entry is required'; }
 
@@ -71,8 +71,8 @@ class EntryValidation {
       }
     }
     if (entry) {
-      if (!validator.isLength(entry, { min: 10, max: 2000 })) {
-        errors.entry = 'Diary entry provided must be between 10 to 2000 characters';
+      if (!validator.isLength(entry, { min: 10, max: 500 })) {
+        errors.entry = 'Diary entry provided must be between 10 to 500 characters';
       }
     }
     // checks if the errors object is empty

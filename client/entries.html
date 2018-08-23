@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+</head>
+
+<body id="body" onload="getAllEntry();">
+  <nav class="navcolor">
+    <div id="logo">
+      <a href="index.html" class="nav-logo ">
+        <img src="./public/img/logo-small2.png" alt="logo">
+        <span> My Diary</span>
+      </a>
+    </div>
+    <div style="margin: auto;">
+      <p style="height: 27px;color:white"> Total entries:
+        <span id="total-entries">0</span>
+      </p>
+    </div>
+
+    <div class="search-entry-title">
+      <button>
+        Search
+      </button>
+      <input type="text" placeholder="title">
+    </div>
+    <div class="menu">
+      <ul>
+        <li>
+          <a href="add-entry.html" class="add">Add new entry</a>
+        </li>
+        <li>
+          <a href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <a href="user_detail.html" id="user">
+      <div class="user">
+        <img src="./public/img/default-img.png" alt="User" width="96" height="96" id="nav-img">
+        <span id="nav-name"></span>
+      </div>
+    </a>
+
+  </nav>
+  <section>
+    <h2 class="heading">My Entries</h2>
+    <!-- <div class="all-entries"> -->
+    <table id="entries-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th>Entry</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+      </tbody>
+    </table>
+    <!-- </div> -->
+  </section>
+  <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="public/js/get-all-entry.js"></script>
+</body>
+
+</html>

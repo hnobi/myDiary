@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>user detail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/form.css" />
+  <link rel="stylesheet" href="./public/css/message.css">
+</head>
+
+<body onload="getUserDetails();">
+  <nav class="navcolor">
+    <div id="logo" class="nav-logo">
+      <a href="index.html" class="nav-logo ">
+        <img src="./public/img/logo-small2.png" alt="logo">
+        <span> My Diary</span>
+      </a>
+    </div>
+    <div style="margin: auto;">
+
+    </div>
+    <div class="menu">
+      <ul>
+        <li>
+          <a href="add-entry.html" class="add">Add new entry</a>
+        </li>
+        <li>
+          <a href="entries.html">My Entries</a>
+        </li>
+        <li>
+          <a href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <a href="user_detail.html" id="user">
+      <div class="user">
+        <img src="./public/img/default-img.png" alt="User" width="96" height="96" id="nav-img">
+        <span id="nav-name"></span>
+      </div>
+    </a>
+  </nav>
+  <div id="loading">
+    <h2>Loading ...</h2>
+  </div>
+  <section>
+    <div>
+      <h2 class="heading">User Account</h2>
+      <p style="text-align: center;font: 1em sans-serif;color:#fff;font-weight: bolder;">Modify your account details</p>
+    </div>
+    <main id="user-details">
+      <div class="profile_picx" style="margin:30px auto">
+        <img alt="profile picture" id="user-image">
+        <form id="update-image">
+          <input type="file" id="image">
+        </form>
+      </div>
+      <div class="container">
+        <form id="update-user">
+          <label for="name ">Name</label>
+          <input type="text" id="fullname" name="name">
+          <label for="ename">Email</label>
+          <input type="email" id="email" name="email" disabled>
+          <label for=" ">Diary's name</label>
+          <input type="text" id="username" name="username">
+          <label>Remainder setting (days)</label>
+          <input type="text" id="remainder" name="remainder">
+          <label>Change password</label>
+          <input type="password" id="password" name="password" pattern="^((?=.*[0-9])(?=.*[a-zA-Z])).{8,12}$" title="Password must contain atleast one number and one letter and must be between 8 to 12 characters "
+            required placeholder="Type your original password or the new one to change to">
+          <label></label>
+          <input type="submit" value="Save changes">
+        </form>
+      </div>
+    </main>
+  </section>
+  <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="./public/js/user-detail.js"></script>
+</body>
+
+</html>

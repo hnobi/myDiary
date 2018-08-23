@@ -35,7 +35,7 @@ class UserValidation {
     } else { errors.fullname = 'fullname  is required'; }
 
     if (!validator.isEmpty(username)) {
-      if (!validator.isLength(username, { min: 2, max: 100 })) {
+      if (!validator.isLength(username, { min: 2, max: 15 })) {
         errors.username = 'username must be between 2 to 100 characters';
       }
     } else { errors.username = 'username  is required'; }

@@ -27,10 +27,11 @@ const createTable = () => {
   9
     password VARCHAR(255) NOT NULL,
   
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    createdAt timestamptz NULL DEFAULT CURRENT_TIMESTAMP,
 
-      updatedAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    remainder INTEGER NOT NULL DEFAULT  0,
 
+    image VARCHAR(255)  
   );
 
 
@@ -45,8 +46,7 @@ const createTable = () => {
     userId int REFERENCES users(id) ON DELETE CASCADE,
   
     date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP 
-
-
+    
      )`;
 
   client.query(query, (err) => {

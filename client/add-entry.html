@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Add Entry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./public/css/message.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+</head>
+
+<body>
+  <nav class="navcolor">
+    <div id="logo" class="nav-logo">
+      <a href="index.html" style="display: flex;" class="nav-logo ">
+        <img src="./public/img/logo-small2.png" alt="logo">
+        <span> My Diary</span>
+      </a>
+    </div>
+    <div style="margin: auto;">
+      <!-- <p style="height: 27px;color:white"> Total entries:
+        <span id="total-entries"></span>
+      </p> -->
+    </div>
+    <div class="menu">
+      <ul>
+        <li>
+          <a href="entries.html">View Entries</a>
+        </li>
+        <li>
+          <a href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <a href="user_detail.html" id="user">
+      <div class="user">
+        <img src="./public/img/default-img.png" alt="User" width="96" height="96" id="nav-img">
+        <span id="nav-name"></span>
+      </div>
+    </a>
+  </nav>
+  <section>
+    <div id="loading">
+      <h2>Loading ...</h2>
+    </div>
+    <div id="success-message">
+      <span id="close">&times;</span>
+      <h3>Successfully added new entry</h3>
+    </div>
+    <h2 class="heading">Add Entry</h2>
+    <div class="container">
+      <form id="add-entry">
+        <label for="title">Entry title</label>
+        <p id="existed-title">Title already exit in your diary</p>
+        <input type="text" id="title" name="title" placeholder="Your title.." required>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date">
+        <label for="entry">Entry</label>
+        <textarea id="entry" name="entry" placeholder="Write your journal..." required maxlength="500" and minlength="10"></textarea>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </section>
+
+  <p class="footer"> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="./public/js/add-entry.js"></script>
+
+</body>
+
+</html>

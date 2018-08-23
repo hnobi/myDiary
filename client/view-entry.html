@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./public/css/main.css" />
+  <link rel="stylesheet" href="public/css/message.css">
+</head>
+
+<body id="body" onload="getEntry();">
+  <nav class="navcolor">
+    <div id="logo" class="nav-logo">
+      <a href="index.html" class="nav-logo ">
+        <img src="./public/img/logo-small2.png" alt="logo">
+        <span> My Diary</span>
+      </a>
+    </div>
+    <div style="margin: auto;">
+      </p>
+    </div>
+    <div class="menu">
+      <ul>
+        <li>
+          <a href="add-entry.html" class="add">Add new entry</a>
+        </li>
+        <li>
+          <a href="entries.html">View Entries</a>
+        </li>
+        <li>
+          <a href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+  <section>
+    <!-- <div id="loading">
+      <h2>Deleting ...</h2>
+    </div> -->
+    <div id="success-message">
+      <span id="close">&times;</span>
+      <h3 style="color: red;">Successfully deleted an entry</h3>
+    </div>
+    <h2 class="heading">Entry information</h2>
+
+    <div class="container view-entry">
+      <div class="title">
+        <h3>Entry title</h3>
+        <p id="title"></p>
+      </div>
+      <h3>Entry</h3>
+      <div class="entry">
+        <p id="content">
+        </p>
+      </div>
+      <div class="date">
+        <h3>Posted : </h3>
+        <p id="date"></p>
+      </div>
+      <div class="div" style="display: flex;
+      width: 100%;justify-content: space-between;margin: auto">
+        <a href="edit-entry.html">
+          <button class="edit edit-btn">edit</button>
+        </a>
+        <a id="delete" onclick="deleteEntry();">
+          <button class="delete  delete-btn">delete</button>
+        </a>
+      </div>
+    </div>
+  </section>
+  <p class="footer "> copyright © 2018. MyDiary @ Andela. Hammed Noibi.</p>
+  <script src="public/js/single-entry.js"></script>
+  <script src="public/js/delete-entry.js"></script>
+</body>
+
+</html>

@@ -6,12 +6,11 @@
   "scripts": {
     "start": "babel-node -- server/app.js",
     "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
-    "test": "set NODE_ENV=test&& npm run migrate&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
-    "dev": "set NODE_ENV=development &&  npm run table",
+    "test": "set NODE_ENV=test&& nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
     "heroku-postbuild": "npm run migrate",
+    "build": "cross-env NODE_ENV=production&&  ",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "migrate": "babel-node -- server/models/tableSchema.js",
-    "migrate-test": "cross-env NODE_ENV=test npm run"
+    "migrate": "babel-node -- server/models/tableSchema.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +27,9 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
+    "cloudinary": "^1.11.0",
+    "connect-multiparty": "^2.1.1",
+    "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",

@@ -1,6 +1,4 @@
-import entryData from '../models/entries';
 import db from '../models/db';
-
 /**
 * @export
 *  @class EntryController
@@ -111,9 +109,10 @@ class EntryController {
       res.status(500).json({
         status: 'Failed',
         message: err.message
-      })
+      });
     });
   }
+
   /**
       * Get a particular entry from the entry model
       * @param {obj} req
@@ -123,7 +122,7 @@ class EntryController {
   getEntry(req, res) {
     const { entryId } = req.params;
 
-    const sql = 'SELECT id FROM entries WHERE userid = $1 AND id = $2',
+    const sql = 'SELECT * FROM entries WHERE userid = $1 AND id = $2',
       param = [req.decoded.userid, entryId];
     db.query(sql, param).then((result) => {
       if (result.rowCount === 0) {
@@ -135,11 +134,9 @@ class EntryController {
       }
       return res.status(200)
         .json({
-          data: {
-            status: 'Success',
-            message: 'Successfully retrieve an entry',
-            entry: result
-          }
+          status: 'Success',
+          message: 'Successfully retrieve an entry',
+          data: result.rows[0]
         });
 
 
@@ -177,7 +174,7 @@ class EntryController {
           status: 'Success',
           message: 'Successfully deleted entry',
           data: results.rows
-        })
+        });
     }).catch((err) => {
       res.status(500).json({
         status: 'Failed',
@@ -187,4 +184,3 @@ class EntryController {
   }
 }
 export default new EntryController();
-
