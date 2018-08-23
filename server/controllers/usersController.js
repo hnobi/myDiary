@@ -125,7 +125,6 @@ class UsersController {
             fullname: user.rows[0].fullname,
             username: user.rows[0].username,
             email: user.rows[0].email,
-            password: user.rows[0].password,
             image: user.rows[0].image,
             remainder: user.rows[0].remainder,
           }

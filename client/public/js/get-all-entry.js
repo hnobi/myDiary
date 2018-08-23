@@ -2,6 +2,13 @@ const token = localStorage.getItem('token');
 if (token === null) {
   window.location.href = './signin.html';
 }
+//   ========= navbar userdetail ======
+const userName = localStorage.getItem('name');
+const userImg = localStorage.getItem('image');
+document.getElementById('nav-name').innerHTML = userName
+document.getElementById('nav-img').src = userImg;
+//   ========= navbar userdetail ends ======
+
 const getAllEntry = () => {
   const option = {
     method: 'GET',

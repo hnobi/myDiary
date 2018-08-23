@@ -20,9 +20,7 @@
       </a>
     </div>
     <div style="margin: auto;">
-      <p style="height: 27px;color:white"> Total entries:
-        <span>4</span>
-      </p>
+
     </div>
     <div class="menu">
       <ul>
@@ -39,7 +37,8 @@
     </div>
     <a href="user_detail.html" id="user">
       <div class="user">
-        <img src="./public/img/user.jpg" alt="User" width="96" height="96"> Hammed
+        <img src="./public/img/default-img.png" alt="User" width="96" height="96" id="nav-img">
+        <span id="nav-name"></span>
       </div>
     </a>
   </nav>
@@ -69,7 +68,8 @@
           <label>Remainder setting (days)</label>
           <input type="text" id="remainder" name="remainder">
           <label>Change password</label>
-          <input type="password" id="password" name="password">
+          <input type="password" id="password" name="password" pattern="^((?=.*[0-9])(?=.*[a-zA-Z])).{8,12}$" title="Password must contain atleast one number and one letter and must be between 8 to 12 characters "
+            required placeholder="Type your original password or the new one to change to">
           <label></label>
           <input type="submit" value="Save changes">
         </form>

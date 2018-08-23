@@ -2,6 +2,13 @@ const token = localStorage.getItem('token');
 if (token === null) {
   window.location.href = './signin.html';
 }
+//   ========= navbar userdetail ======
+const userName = localStorage.getItem('name');
+const userImg = localStorage.getItem('image');
+document.getElementById('nav-name').innerHTML = userName
+document.getElementById('nav-img').src = userImg;
+//   ========= navbar userdetail ends ======
+
 const getUserDetails = () => {
   const option = {
     method: 'GET',
@@ -19,7 +26,6 @@ const getUserDetails = () => {
         document.getElementById('fullname').value = user.fullname;
         document.getElementById('username').value = user.username;
         document.getElementById('email').value = user.email;
-        document.getElementById('password').value = user.password;
         document.getElementById('remainder').value = user.remainder;
         document.getElementById('user-image').src = user.image;
       }
@@ -46,8 +52,9 @@ const updateUserDetails = (e) => {
   };
   fetch('https://your-diary.herokuapp.com/api/v1/user/details', option)
     .then(res => res.json()).then(() => {
-      console.log('successfully fetch data');
+      console.log('successfully updating data');
       document.getElementById('loading').style.display = 'none';
+      window.localStorage.setItem('name', (post.username));
     }).catch((err) => {
       console.log(err);
     });
@@ -74,6 +81,8 @@ const updateImage = (e) => {
     .then(res => res.json())
     .then((data) => {
       document.getElementById('user-image').src = data.imageUrl;
+      window.localStorage.setItem('image', (data.imageUrl));
+
     }).catch(err => console.log(err));
 };
 document.getElementById('update-image').addEventListener('change', updateImage, false);
