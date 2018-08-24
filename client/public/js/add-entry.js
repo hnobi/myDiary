@@ -37,8 +37,11 @@ const addEntry = (e) => {
       if (data.status === 'Success') {
         message.style.display = 'block';
         document.getElementById('existed-title').style.display = '';
+      } else if (data.message === 'Authentication failed. Token is either invalid or expired') {
+        window.location.href = './signin.html';
       } else {
         document.getElementById('existed-title').style.display = 'block';
+        console.log(data)
       }
     })
     .catch((err) => { console.log(err); });
