@@ -1,9 +1,12 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import cloudinary from 'cloudinary';
+import cron from 'node-cron';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import db from '../models/db';
 
-require('dotenv').config();
+dotenv.config();
 
 cloudinary.config({
   cloud_name: process.env.Cloud_name,
@@ -116,9 +119,15 @@ class UsersController {
     });
   }
 
+  /**
+    * @param {obj} req
+    * @param {obj} res
+    * @memberof UsersController
+    *  @returns {obj} insertion error messages or success message
+    */
   userDetails(req, res) {
     db.query(`SELECT * FROM users WHERE id = '${req.decoded.userid}'`)
-      .then((user) => res.status(200)
+      .then(user => res.status(200)
         .json({
           status: 'Success',
           message: 'successfull retrived user details',
@@ -128,12 +137,18 @@ class UsersController {
             username: user.rows[0].username,
             email: user.rows[0].email,
             image: user.rows[0].image,
-            remainder: user.rows[0].remainder,
+            reminder: user.rows[0].reminder,
           }
         }))
       .catch((err) => { console.log(err); });
   }
 
+  /**
+    * @param {obj} req
+    * @param {obj} res
+    * @memberof UsersController
+    *  @returns {obj} insertion error messages or success message
+    */
   updateimage(req, res) {
     cloudinary.uploader.upload(req.files.image.path, (result) => {
       const { userid } = req.decoded;
@@ -141,26 +156,63 @@ class UsersController {
         res.status(200).json({
           status: 'success',
           imageUrl: user.rows[0].image
-        })
-      }).catch(err => console.log(err))
+        });
+      }).catch(err => console.log(err));
     });
-  };
+  }
+
+  /**
+    * @param {obj} req
+    * @param {obj} res
+    * @memberof UsersController
+    *  @returns {obj} insertion error messages or success message
+    */
   updateUserProfile(req, res) {
     const { userid } = req.decoded;
-    const { fullname, username, remainder } = req.body,
+    const {
+      fullname, username, reminder, email
+    } = req.body,
       hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    const params = [fullname, username, hashedPassword, remainder, userid];
-    const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, remainder= $4 WHERE id=$5  RETURNING *';
+    const params = [fullname, username, hashedPassword, reminder, email, userid];
+    const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, reminder= $4, email= $5 WHERE id=$6  RETURNING *';
     db.query(sql, params).then((user) => {
-
       res.status(200).json({
         status: 'Success',
         message: 'successfully modified your profile',
         userDetails: user.rows[0]
-
-      })
-    }).catch(err => console.log(err))
-  };
-
+      });
+      // create mail transporter
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'hnobi.mydiary@gmail.com',
+          pass: 'hnobi.mydiary2018'
+        }
+      });
+      // sending emails at periodic intervals for the days of the month
+      cron.schedule(`* * * */${reminder} * *`, () => {
+        console.log('---------------------');
+        console.log('Running Cron Job');
+        const mailOptions = {
+          from: 'hnobi.mydiary@gmail.com',
+          to: `${email}`,
+          subject: 'Reminder from your diary',
+          text: `Hi  ${username},  why don't you take a minute to write in your diary`,
+          html: `<p> Hi<b> ${username},</b> why don't you take a minute to write in your diary, This is an automatimatic reminder from 
+          <a href="https://hnobi.github.io/myDiary/client/">MyDiary<a/>.</p> <br>
+          <p>You will receive reminder mail every ${reminder} days based on your reminder setting.</p>
+          <p> You can go to  <a href="https://hnobi.github.io/myDiary/client/"> https://hnobi.github.io/myDiary/client/<a/> to Add an entry  or set your reminder.</p> 
+          `
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            throw error;
+          } else {
+            console.log('Email successfully sent!');
+          }
+        });
+      });
+    }).catch(err => console.log(err));
+  }
 }
 export default new UsersController();

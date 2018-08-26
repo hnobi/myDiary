@@ -26,7 +26,7 @@ const getUserDetails = () => {
         document.getElementById('fullname').value = user.fullname;
         document.getElementById('username').value = user.username;
         document.getElementById('email').value = user.email;
-        document.getElementById('remainder').value = user.remainder;
+        document.getElementById('').value = user.;
         document.getElementById('user-image').src = user.image;
       }
     });
@@ -40,7 +40,7 @@ const updateUserDetails = (e) => {
     username: document.getElementById('username').value,
     email: document.getElementById('email').value,
     password: document.getElementById('password').value,
-    remainder: document.getElementById('remainder').value,
+    reminder: document.getElementById('').value,
   };
   const option = {
     method: 'PUT',

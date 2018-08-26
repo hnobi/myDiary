@@ -29,7 +29,7 @@ const createTable = () => {
   
     createdAt timestamptz NULL DEFAULT CURRENT_TIMESTAMP,
 
-    remainder INTEGER NOT NULL DEFAULT  0,
+    reminder INTEGER  DEFAULT  0,
 
     image VARCHAR(255)  
   );
