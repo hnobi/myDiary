@@ -1,30 +1,26 @@
+sudo: required
 language: node_js
 node_js:
-    - "node"
+  - "node"
+services:
+  - postgresql 
 env:
   global:
   - CC_TEST_REPOTER_ID=4689ee4d5800bef59dd38644bf9fd9a6da6d9d5c125cc94e7d4745ad581c2817
-cache:
-  directories:
-   - "node_modules"
-services:
- - postgresql
-addons:
-  chrome: stable
-  postgresql: "9.6"
 before_script:
   - npm install
-  - psql -c 'create database teseDB;' -U postgres
+  - npm install coveralls --save-dev
+  - npm install mocha-lcov-reporter --save-dev
+  - npm install supertest 
+  - psql -c 'create database testDB;' -U postgres
+  - yarn global add nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  script: 
-  - npm run test 
+script:
+  - npm test
   - nyc --reporter=lcov yarn run test
 
-after_script:
-  - /cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-  
 after_success:
   - npm run coveralls
-  - codeclimate-test-reporter < ./coverage/lcov.info
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
