@@ -2,8 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import apiRoute from './routes/router';
-import cron from "node-cron";
-import nodemailer from "nodemailer";
 
 const app = express();
 const port = parseInt((process.env.PORT), 10) || 3000;
@@ -12,10 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
-  res.status(200)
-    .json({
-      message: 'Welcome to My Diary application',
-    });
+  res.redirect('https://mydiary20.docs.apiary.io');
 });
 app.use('/api/v1', apiRoute);
 app.use('*', (req, res) => {

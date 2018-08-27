@@ -6,7 +6,7 @@
 body{
   width:100%;
   height: 100%; 
-  background: linear-gradient(#b3aea4,#8d8a8a);
+    /* background: linear-gradient(#b3aea4,#8d8a8a); */
   background-size: cover;
   background:#b3aea4;
 }
@@ -272,13 +272,15 @@ font-family:  'Trebuchet MS';
 .footer{
   color:#ffe57f;
   text-align:  center;
-   /* position:fixed; */
-   /* bottom:0; */
+   position:fixed;
+   bottom:0;
    width:100%;
-   margin-top: auto;
+   margin-top: ;
    background-color: #212121;
-   height: 50px;
-   padding-top: 30px;
+   height: 30px;
+   padding-top: 50px;
+     z-index: 10px
+
    
 }
 /* ===================================== Page banner Ends ================================== */
@@ -365,11 +367,12 @@ border-radius: 10px;
 
 /* =========================  Button style Start ======================================= */
 
-/* ===================== My Entry  ion start  ================================== */
+/* ===================== My Entry section start  ================================== */
 section{
   width:90%;
   margin:10px auto;
-  /* height: 110vh; */
+  height: 108vh;
+
 }
 h2.heading{
 text-align: center;
@@ -427,6 +430,7 @@ td, th {
 }
 
 @media screen and (max-width: 1092px) {
+
   .search-entry-title{
    display:flex;
    /* justify-content: space-between; */
@@ -443,7 +447,7 @@ td, th {
 @media screen and (max-width: 760px) {
   body{
     height: 100%;
-  
+  }
   nav{
     width: 100%;
     /* display: block; */

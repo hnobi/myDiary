@@ -105,7 +105,7 @@ class UsersController {
             });
         }
       }
-      return res.status(500)
+      return res.status(400)
         .json({
           status: 'Failed',
           message: 'invalid username or password'
@@ -190,7 +190,7 @@ class UsersController {
         }
       });
       // sending emails at periodic intervals for the days of the month
-      cron.schedule(`* * * */${reminder} * *`, () => {
+      cron.schedule(`0 0 0 */${reminder} * *`, () => {
         console.log('---------------------');
         console.log('Running Cron Job');
         const mailOptions = {
