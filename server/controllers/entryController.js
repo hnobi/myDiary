@@ -74,7 +74,8 @@ class EntryController {
           message: 'Successfully updated  your entry',
           data: {
             id: entryId,
-            entry: result
+            title,
+            entry
           }
         });
     }).catch(err => res.status(500).json({
@@ -169,11 +170,10 @@ class EntryController {
 
           });
       }
-      return res.status(200)
+      return res.status(204)
         .json({
           status: 'Success',
           message: 'Successfully deleted entry',
-          data: results.rows
         });
     }).catch((err) => {
       res.status(500).json({
