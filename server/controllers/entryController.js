@@ -79,7 +79,7 @@ class EntryController {
           }
         });
     }).catch(err => res.status(500).json({
-      status: 'Failed',
+      status: 'Failed2',
       message: err.message
     }));
   }
@@ -167,16 +167,15 @@ class EntryController {
           .json({
             status: 'Failed',
             message: 'entry id does not exist',
-
           });
       }
-      return res.status(204)
+      return res.status(200)
         .json({
           status: 'Success',
           message: 'Successfully deleted entry',
         });
     }).catch((err) => {
-      res.status(500).json({
+      return res.status(500).json({
         status: 'Failed',
         message: err.message
       });
