@@ -1,7 +1,6 @@
 import chai from 'chai';
 import supertest from 'supertest';
 import app from '../app';
-// import entryData from '../models/entries';
 
 const { expect } = chai;
 const request = supertest(app);
