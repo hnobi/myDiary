@@ -1,12 +1,11 @@
 import chai from 'chai';
 import supertest from 'supertest';
 import app from '../app';
-// import entryData from '../models/entries';
 
 const { expect } = chai;
 const request = supertest(app);
 let tokenValue;
-// const wrongToken = 'dshjjjsjwsjsnsnsnsnsnsns'
+const wrongToken = 'dshjjjsjwsjsnsnsnsnsnsns'
 
 describe('All test cases for MyDiary application', () => {
   describe('test case for loading application home page', () => {
@@ -267,7 +266,6 @@ describe('All test cases for adding entry to the application', () => {
       done();
     });
   });
-<<<<<<< HEAD
   it('should  not create a new user account and return a `400`', (done) => {
     request.post('/api/v1/auth/signup')
       .send({
@@ -419,25 +417,42 @@ describe('All test cases for adding entry to the application', () => {
         });
     });
   });
-  describe('Test case of correct input for adding entry ', () => {
-    it('should return a `201` status code with res.body success message', (done) => {
-      request.post('/api/v1/entries')
-        .set('x-access-token', token)
-        .send({
-          date: '13-22-2017',
-          entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory',
-          title: 'panther partytwo'
-        })
-        .expect(201)
-        .end((err, res) => {
-          expect(res.body).deep.equal({
-            status: 'Success',
-            message: 'Successfully added new entry',
+  describe('All test cases for adding entry to the application', () => {
+    describe('All  test cases of wrong input for adding entry ', () => {
+      it('should return a `400` status code with res.body error message for wrong or invalid token', (done) => {
+        request.post('/api/v1/entries')
+          .set('x-access-token', wrongToken)
+          .send({
+            title: '3rd holiday',
+            date: '23-11-2018',
+            entry: 'very fun'
+          })
+          .expect(401)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Failed');
+            expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
+            done();
+          });
+      });
+      it('should return a `400` status code with res.body error message', (done) => {
+        request.post('/api/v1/entries')
+          .set('x-access-token', tokenValue)
+          .send({
+            title: '3rd holiday',
+            date: '23-11-2018',
+            entry: 'very fun'
+          })
+          .expect(400)
+          .end((err, res) => {
+            expect(res.body.errors.title).to.equal('Entry title must not contain numbers');
+            expect(res.body.errors.entry).to.equal('Diary entry provided must be between 10 to 500 characters');
+            if (err) done(err);
+            done();
           });
 
-          if (err) done(err);
-          done();
-        });
+        if (err) done(err);
+        done();
+      });
     });
   });
 });
@@ -517,7 +532,7 @@ describe('test case for retriving all entry in the diary', () => {
           .set('Accept', 'application/json')
 
           .send({
-            title: 'black panther partytwo',
+            title: 'black panther party',
             date: '10-09-2018',
             entry: 'Reflection describes a real or imaginary scene, event, interaction, passing thought, memory',
 
@@ -551,6 +566,16 @@ describe('test case for retriving all entry in the diary', () => {
   describe('test case for retriving all entry in the diary', () => {
     it('should return `200` status code with `res.body` success messages', (done) => {
       request.get('/api/v1/entries')
+        .set('x-access-token', wrongToken)
+        .expect(401)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Failed');
+          expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
+          done();
+        });
+    });
+    it('should return `200` status code with `res.body` success messages', (done) => {
+      request.get('/api/v1/entries')
         .set('x-access-token', tokenValue)
         .expect(200)
         .end((err, res) => {
@@ -561,16 +586,31 @@ describe('test case for retriving all entry in the diary', () => {
     });
   });
   describe('test case for retriving an entry in the diary', () => {
-    // it('should return `200` status code with `res.body` success messages', (done) => {
-    //   request.get('/api/v1/entries/1')
-    //     .set('x-access-token', tokenValue)
-    //     .expect(200)
-    //     .end((err, res) => {
-    //       expect(res.body.status).to.equal('Success');
-    //       expect(res.body.message).to.equal('Successfully retrieve an entry');
-    //       done();
-    //     });
-    // });
+    it('should return a `400` status code with res.body error message for wrong or invalid token', (done) => {
+      request.put('/api/v1/entries/1')
+        .set('x-access-token', wrongToken)
+        .send({
+          title: '3rd holiday',
+          date: '23-11-2018',
+          entry: 'very fun'
+        })
+        .expect(401)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Failed');
+          expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
+          done();
+        });
+    });
+    it('should return `200` status code with `res.body` success messages', (done) => {
+      request.get('/api/v1/entries/1')
+        .set('x-access-token', tokenValue)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('Successfully retrieve an entry');
+          done();
+        });
+    });
     it('should not retrive sigle entry and return `200` status code with `res.body` error messages', (done) => {
       request.get('/api/v1/entries/17')
         .set('x-access-token', tokenValue)
@@ -597,7 +637,7 @@ describe('test case for retriving all entry in the diary', () => {
           .expect(400)
           .end((err, res) => {
             expect(res.body.errors.title).to.equal('Entry title must not contain numbers');
-            expect(res.body.errors.entry).to.equal('Diary entry provided must be between 10 to 2000 characters');
+            expect(res.body.errors.entry).to.equal('Diary entry provided must be between 10 to 500 characters');
             done();
           });
       });
@@ -620,26 +660,26 @@ describe('test case for retriving all entry in the diary', () => {
       });
     });
     describe('All  test cases of correct input for updating entries ', () => {
-      // it('should also add an entry and  return a `201` status code with res.body success message', (done) => {
-      //   request.put('/api/v1/entries/2')
-      //     .set('x-access-token', tokenValue)
-      //     .send({
-      //       title: 'panther partythird',
-      //       date: '27-11-2019',
-      //       entry: 'describes a real or imaginary scene, event, interaction, passing thought, memory'
-      //     })
-      //     .expect(201)
-      //     .end((err, res) => {
-      //       expect(res.body.status).to.equal('Success');
-      //       expect(res.body.message).to.equal('Successfully updated  your entry');
-      //       done();
-      //     });
-      // });
+      it('should also add an entry and  return a `201` status code with res.body success message', (done) => {
+        request.put('/api/v1/entries/2')
+          .set('x-access-token', tokenValue)
+          .send({
+            title: 'pand partythird',
+            date: '10-10-2018',
+            entry: 'describes a real or imaginary scene, event, interaction, passing thought, memory'
+          })
+          .expect(201)
+          .end((err, res) => {
+            expect(res.body.status).to.equal('Success');
+            expect(res.body.message).to.equal('Successfully updated  your entry');
+            done();
+          });
+      });
     });
   });
   describe('test case for deleting an entry in the diary', () => {
     it('should  delete an entry and return `200` status code with `res.body` success messages', (done) => {
-      request.delete('/api/v1/entries/2')
+      request.delete('/api/v1/entries/1')
         .set('x-access-token', tokenValue)
         .expect(200)
         .end((err, res) => {
@@ -660,6 +700,7 @@ describe('test case for retriving all entry in the diary', () => {
           done();
 >>>>>>> a8ff4d505ff88315a13156b54972d6de3c292fe7
         });
+<<<<<<< HEAD
         if (err) done(err);
         done();
       });
@@ -716,5 +757,79 @@ describe('test case for deleting an entry in the diary', () => {
         if (err) done(err);
         done();
       });
+=======
+    });
+    it('should return a `400` status code with res.body error message for wrong or invalid token', (done) => {
+      request.delete('/api/v1/entries/1')
+        .set('x-access-token', wrongToken)
+        .expect(401)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Failed');
+          expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
+          done();
+        });
+    });
+  });
+  describe('test case for user details ', () => {
+    it('should return `200` status code with `res.body` success messages', (done) => {
+      request.get('/api/v1//user/details')
+        .set('x-access-token', wrongToken)
+        .expect(401)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Failed');
+          expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
+          done();
+        });
+    });
+    it('should return `200` status code with `res.body` success messages', (done) => {
+      request.get('/api/v1//user/details')
+        .set('x-access-token', tokenValue)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('successfull retrived user details');
+          expect(res.body.data).to.be.an('object');
+          done();
+        });
+    });
+  });
+  describe('All  test cases for updating user details ', () => {
+    it('should return a `400` status code with res.body error message', (done) => {
+      request.put('/api/v1/user/details')
+        .set('x-access-token', wrongToken)
+        .send({
+          fullname: 'Hammed Noibi',
+          username: 'hnobi',
+          email: 'hnobi09@yahoo.com',
+          password: '12345678',
+          reminder: '2',
+          image: ''
+        })
+        .expect(400)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Failed');
+          expect(res.body.message).to.equal('Authentication failed. Token is either invalid or expired');
+          done();
+        });
+    });
+    it('should return a `400` status code with res.body error message', (done) => {
+      request.put('/api/v1/user/details')
+        .set('x-access-token', tokenValue)
+        .send({
+          fullname: 'Hammed Noibi',
+          username: 'hnobi',
+          email: 'hnobi09@yahoo.com',
+          password: '12345678',
+          reminder: '2',
+          image: ''
+        })
+        .expect(400)
+        .end((err, res) => {
+          expect(res.body.status).to.equal('Success');
+          expect(res.body.message).to.equal('successfully modified your profile');
+          expect(res.body.userDetails).to.be.an('object');
+          done();
+        });
+    });
   });
 });
