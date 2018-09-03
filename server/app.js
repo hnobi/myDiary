@@ -10,7 +10,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
-  res.redirect('https://mydiary20.docs.apiary.io');
+  res.send({
+    message: 'Welcome to My Diary application',
+  });
 });
 app.use('/api/v1', apiRoute);
 app.use('*', (req, res) => {

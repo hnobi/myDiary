@@ -25,6 +25,9 @@ router.route('/user/upload')
 router.route('/entries')
   .post(authToken, EntryValidations.addEntryVaLidation, EntryControllers.addEntry)
   .get(authToken, EntryControllers.getAllEntry);
+// search query string
+router.route('/entries/search')
+  .get(authToken, EntryControllers.searchEntry);
 
 router.route('/entries/:entryId')
   .put(authToken, EntryValidations.modifyEntryVaLidation, EntryControllers.modifyEntry)

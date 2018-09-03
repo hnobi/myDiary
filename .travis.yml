@@ -12,7 +12,7 @@ before_script:
   - npm install coveralls --save-dev
   - npm install mocha-lcov-reporter --save-dev
   - npm install supertest 
-  - psql -c 'create database testDB;' -U postgres
+  - psql -c 'create database teseDB;' -U postgres
   - yarn global add nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
