@@ -174,12 +174,37 @@ class EntryController {
           status: 'Success',
           message: 'Successfully deleted entry',
         });
+    }).catch((err) => res.status(500).json({
+      status: 'Failed',
+      message: err.message
+    }));
+  }
+
+  searchEntry(req, res) {
+    const { entry } = req.query;
+    const sql = `SELECT * FROM entries WHERE userid = $1 AND entry ILIKE '%${entry}%' OR title ILIKE '%${entry}%'`,
+      param = [req.decoded.userid];
+    db.query(sql, param).then((result) => {
+      if (result.rowCount === 0) {
+        return res.status(404)
+          .json({
+            status: 'Failed',
+            message: 'Entry title not found'
+          });
+      }
+      return res.status(200)
+        .json({
+          status: 'Success',
+          message: 'Successfully retrieve an entry',
+          data: result.rows
+        });//
     }).catch((err) => {
-      return res.status(500).json({
+      res.status(500).json({
         status: 'Failed',
         message: err.message
       });
     });
   }
+
 }
 export default new EntryController();
