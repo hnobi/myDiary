@@ -1,9 +1,12 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
+import configuration from '../config/config';
 
 dotenv.config();
+const env = process.env.NODE_ENV || 'development';
 
-const connectionString = process.env.DEV_URL;
+const config = configuration[env];
+const connectionString = config.url;
 const client = new Client(connectionString);
 
 client.connect();

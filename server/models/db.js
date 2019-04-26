@@ -3,8 +3,10 @@ import dotenv from 'dotenv';
 import configuration from '../config/config';
 
 const env = process.env.NODE_ENV || 'development';
-const config = configuration[env];
+console.log(env, '===============env');
 
+const config = configuration[env];
+console.log(config, '-------cofig');
 const connectionString = config.url;
 dotenv.config();
 
