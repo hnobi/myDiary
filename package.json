@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node -- server/app.js",
     "start:dev": "nodemon --watch server --exec babel-node -- server/app.js",
-    "test": "set NODE_ENV=test&& npm run migrate&&  nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
+    "test": "cross-env NODE_ENV=test&& npm run migrate&&  nyc --reporter=html --reporter=text mocha --timeout 500000 --exit --compilers js:babel-core/register  server/specs/",
     "heroku-postbuild": "npm run migrate",
     "build": "cross-env NODE_ENV=production&&  ",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -33,6 +33,7 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.11",
     "mocha": "^5.2.0",
     "node-cron": "^1.2.1",
     "nodemailer": "^4.6.8",
