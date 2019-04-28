@@ -77,7 +77,6 @@ describe('All test cases for MyDiary application', () => {
           .send(userInfo)
           .expect(201)
           .end((err, res) => {
-            console.log(res, 'rers-------------------------')
             expect(res.body.status).to.equal('Success');
             expect(res.body.message).to.equal('Successfully created myDiary account');
             expect(res.body.data.username).to.equal('hnobi');

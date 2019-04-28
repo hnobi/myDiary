@@ -56,7 +56,6 @@ const createTable = () => {
       return err.message;
     }
     client.end();
-  }
-  );
+  });
 };
 createTable();

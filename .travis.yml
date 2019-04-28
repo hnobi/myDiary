@@ -13,12 +13,13 @@ before_script:
   - npm install mocha-lcov-reporter --save-dev
   - npm install supertest 
   - psql -c 'create database teseDB;' -U postgres
+  - npm run migrate
   - yarn global add nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - npm test
+  - npm run test
   - nyc --reporter=lcov yarn run test
 
 after_success:
