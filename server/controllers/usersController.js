@@ -49,11 +49,14 @@ class UsersController {
               expiresIn: 60 * 60 * 10 // 10 hours
             });
             req.token = token;
+          const data = user.rows[0];
+          
+          delete data.password;
             res.status(201)
               .json({
                 status: 'Success',
                 message: 'Successfully created myDiary account',
-                data: user.rows[0],
+                data,
                 token
               });
           }).catch(err => res.status(500).json({
