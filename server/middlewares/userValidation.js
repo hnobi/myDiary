@@ -36,7 +36,7 @@ class UserValidation {
 
     if (!validator.isEmpty(username)) {
       if (!validator.isLength(username, { min: 2, max: 15 })) {
-        errors.username = 'username must be between 2 to 100 characters';
+        errors.username = 'username must be between 2 to 15 characters';
       }
     } else { errors.username = 'username  is required'; }
 
@@ -46,10 +46,11 @@ class UserValidation {
       }
     } else { errors.email = 'email is required'; }
     if (!validator.isEmpty(password)) {
-      if (!validator.isLength(password, { min: 8 })) {
-        errors.password = 'password must be eight character or more';
+      if (!validator.isLength(password, { min: 4 })) {
+        errors.password = 'password must be four character or more';
       }
     } else { errors.password = 'password  is required'; }
+    
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
     }

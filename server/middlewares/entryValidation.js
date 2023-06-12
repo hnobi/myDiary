@@ -14,9 +14,9 @@ class EntryValidation {
             * @returns {obj} validation error messages object or contents of request.body object
            */
   addEntryVaLidation(req, res, next) {
-    const { title, date, entry } = req.body,
+    const { title, entry } = req.body,
       errors = {};
-    if (title === undefined || date === undefined || entry === undefined) {
+    if (title === undefined || entry === undefined) {
       return res.status(400)
         .json({
           message: 'All or some of the field is/are undefined'
