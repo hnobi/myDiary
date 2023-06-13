@@ -80,11 +80,9 @@ class UserValidation {
         errors.username = 'username must be between 2 to 100 characters';
       }
     } else { errors.username = 'username  is required'; }
-    if (!validator.isEmpty(password)) {
-      if (!validator.isLength(password, { min: 8 })) {
-        errors.password = 'password must be eight character or more';
-      }
-    } else { errors.password = 'password  is required'; }
+
+    if (validator.isEmpty(password)) { errors.password = 'password  is required' }
+    
     if (Object.keys(errors).length !== 0) {
       return res.status(400).json({ errors });
     }
