@@ -49,9 +49,9 @@ class UsersController {
               expiresIn: 60 * 60 * 10 // 10 hours
             });
             req.token = token;
-          const data = user.rows[0];
-          
-          delete data.password;
+            const data = user.rows[0];
+
+            delete data.password;
             res.status(201)
               .json({
                 status: 'Success',
@@ -63,10 +63,14 @@ class UsersController {
             status: 'Failed',
             message: err.message
           }));
-      }).catch(err => res.status(500).json({
-        status: 'Failed',
-        message: err.message
-      }));
+      }).catch((err) => {
+        console.log(err.message, '-------');
+
+        return res.status(500).json({
+          status: 'Failed',
+          message: err.message
+        });
+      });
   }
 
   /**
@@ -171,8 +175,8 @@ class UsersController {
   updateUserProfile(req, res) {
     const { userid } = req.decoded;
     const {
-      fullname, username, reminder, email
-    } = req.body,
+        fullname, username, reminder, email
+      } = req.body,
       hashedPassword = bcrypt.hashSync(req.body.password, 10);
     const params = [fullname, username, hashedPassword, reminder, email, userid];
     const sql = 'UPDATE users SET fullname= $1, username= $2, password= $3, reminder= $4, email= $5 WHERE id=$6  RETURNING *';
